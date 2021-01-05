@@ -41,7 +41,7 @@ jobs:
       run: |
         cd etl
         docker build -t "${PWD##*/}" .
-        docker run "${PWD##*/}" python -V
+        docker run "${PWD##*/}"
 
 
   build_dl:

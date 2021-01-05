@@ -42,7 +42,6 @@ jobs:
         cd etl
         docker build -t "${PWD##*/}" .
         docker run "${PWD##*/}" python -V
-        docker run "${PWD##*/}" version
 
 
   build_dl:

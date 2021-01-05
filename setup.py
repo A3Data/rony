@@ -23,10 +23,9 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
-        'Topic :: Scientific/Engineering :: Artificial Intelligence',
         'Topic :: Software Development'
       ],
-      keywords='machine learning mlops devops artificial intelligence',
+      keywords='data engineering mlops devops pipelines',
       license='Apache License 2.0',
     install_requires=[
         'Click'

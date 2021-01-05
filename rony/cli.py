@@ -2,7 +2,7 @@ import click
 import os
 import re
 import sys
-from .writer import copy_files
+from .writer import copy_files, write_readme_file
 from .__init__ import __version__ as version
 
 LOCAL_PATH = os.getcwd()
@@ -46,6 +46,7 @@ def new(project_name):
 
     # Copy project files
     copy_files(LOCAL_PATH, project_name)
+    write_readme_file(LOCAL_PATH, project_name)
 
     print(f'Creating virtual environment {project_name}_env')
     os.chdir(project_name)

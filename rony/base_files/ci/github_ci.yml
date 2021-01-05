@@ -59,6 +59,7 @@ jobs:
     - name: Build Lambda package
       run: |
         sh scripts/build_lambda_package.sh
+    
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v1.2.1
     

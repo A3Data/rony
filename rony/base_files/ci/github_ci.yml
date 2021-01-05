@@ -1,0 +1,78 @@
+name: Deploy crawlers to lambda
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build_test_lambda:
+    name: Build and test Lambda
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        pip install -U pip
+        pip install -r requirements.txt
+        pip install pytest boto3
+    
+    - name: Run tests on lambda function
+      env:
+        BUCKET: "my-bucket"
+        REGION: "my-region"
+      run: |
+        python -m pytest
+  
+
+  build_docker:
+    name: Build and test docker image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build image
+      run: |
+        cd etl
+        docker build -t "${PWD##*/}" .
+        docker run "${PWD##*/}" python -V
+        docker run "${PWD##*/}" version
+
+
+  build_dl:
+    name: Build and deploy DataLake
+    runs-on: ubuntu-latest
+    needs: [build_test_lambda, build_docker]
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+        
+    - name: Build Lambda package
+      run: |
+        sh scripts/build_lambda_package.sh
+    - name: HashiCorp - Setup Terraform
+      uses: hashicorp/setup-terraform@v1.2.1
+    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Terraform Apply
+      run: |
+        cd infrastructure
+        terraform init
+        terraform validate
+        terraform plan

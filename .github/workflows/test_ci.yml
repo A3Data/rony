@@ -1,0 +1,76 @@
+# CI for testing package internal code
+
+name: Test package
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_test_lambda:
+    name: Build and test Lambda
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        pip install -U pip
+        pip install -r rony/base_files/etl/lambda_requirements.txt
+        pip install pytest boto3
+    
+    - name: Run tests on lambda function
+      env:
+        BUCKET: "my-bucket"
+        REGION: "my-region"
+      run: |
+        cd rony/base_files
+        python -m pytest
+  
+
+  build_docker:
+    name: Build and test docker image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build image
+      run: |
+        cd rony/etl
+        docker build -t "${PWD##*/}" .
+        docker run "${PWD##*/}"
+
+  package_install:
+    name: Test package install
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest
+        pip install coverage
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install .
+    - name: Test with pytest
+      run: |
+        cd rony/tests
+        coverage run -m pytest
+    - name: Coverage report
+      run: |
+        coverage report -m
+
+

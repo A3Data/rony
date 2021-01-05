@@ -82,4 +82,4 @@ def run(image_name):
     if not os.path.exists('Dockerfile'):
         click.echo("You gotta have a Dockerfile file")
     else:
-        os.system(f'docker run --rm -p 5000:5000 {image_name}')
+        os.system(f'docker run --rm {image_name}')

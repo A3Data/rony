@@ -2,7 +2,7 @@ import click
 import os
 import re
 import sys
-from .writer import *
+from .writer import copy_files
 from .__init__ import __version__ as version
 
 LOCAL_PATH = os.getcwd()
@@ -31,28 +31,21 @@ def info():
 
 @cli.command()
 @click.argument('project_name')
-@click.option('-imp', '--implemented', 'implemented', prompt='Do you want to start with an implemented example (recommended) [y/n]?', 
-            default='y', show_default=True)
-def new(project_name, implemented):
+def new(project_name):
     """
     Create a new Rony project
     """
-    if implemented in ['yes', 'ye', 'y', 'Yes', 'YES', 'Y']:
-        file_source = 'file_text'
-    elif implemented in ['no', 'n', 'No', 'NO', 'N']:
-        file_source = 'not_implemented_file_text'
-    
     click.echo(f"Creating project {project_name}")
     # Create project folders
-    os.makedirs(os.path.join(LOCAL_PATH, project_name, 'etl'))
+    os.makedirs(os.path.join(LOCAL_PATH, project_name, 'etl/notebooks'))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, 'dags'))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, 'scripts'))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, 'infrastructure'))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, 'tests'))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, '.github/workflows'))
 
-    # Write files
-    # ...
+    # Copy project files
+    copy_files(LOCAL_PATH, project_name)
 
     print(f'Creating virtual environment {project_name}_env')
     os.chdir(project_name)

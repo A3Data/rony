@@ -13,7 +13,7 @@ setup(
     author='A3Data',
     author_email='rony@a3data.com.br',
     url='https://github.com/A3Data/rony',
-    description='A Data Engineering opinionated framework',
+    description='An opinionated Data Engineering framework',
     long_description=long_description,
     long_description_content_type='text/markdown',
     packages=find_packages(),

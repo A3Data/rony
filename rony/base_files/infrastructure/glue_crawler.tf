@@ -12,6 +12,6 @@ resource "aws_glue_crawler" "raw" {
   }
 
   tags = {
-      foo = "bar"
+    foo = "bar"
   }
 }

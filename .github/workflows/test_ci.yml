@@ -55,6 +55,10 @@ jobs:
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v1.2.1
 
+    - name: create zipfile for validation
+      run: |
+        touch rony/base_files/infrastructure/lambda_function_payload.zip
+
     - name: Terraform validate
       run: |
         cd rony/base_files/infrastructure

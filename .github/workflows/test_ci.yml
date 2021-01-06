@@ -58,6 +58,7 @@ jobs:
     - name: Terraform validate
       run: |
         cd rony/base_files/infrastructure
+        terraform init
         terraform validate
         terraform plan
 

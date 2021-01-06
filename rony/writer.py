@@ -35,6 +35,8 @@ def copy_files(LOCAL_PATH, project_name):
 def write_readme_file(LOCAL_PATH, project_name):
     with open(os.path.join(LOCAL_PATH, project_name, 'README.md'), 'w+') as outfile:
         outfile.write(f"""# {project_name}
+
 Project started in {datetime.today().strftime("%B %d, %Y")}.
+
 **Please, complete here information on using and testing this project.**
 """)

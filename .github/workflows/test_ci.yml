@@ -46,6 +46,7 @@ jobs:
         docker build -t "${PWD##*/}" .
         docker run "${PWD##*/}"
 
+
   terraform_validate:
     name: Terraform validation
     runs-on: ubuntu-latest
@@ -88,3 +89,31 @@ jobs:
       run: |
         cd rony/tests
         coverage run -m pytest && coverage report -m
+
+  
+  test_project:
+    name: Test project structure
+    runs-on: ubuntu-latest
+    needs: [package_install]
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install .
+        rony info
+
+    - name: Test Project structure
+      run: |
+        rony new projex
+        cd projex
+        cat etl/Dockerfile
+        cat dags/titanic_example.py
+        cat infrastructure/s3.tf
+        cat scripts/build_lambda_package.sh

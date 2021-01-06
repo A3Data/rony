@@ -28,6 +28,9 @@ def copy_files(LOCAL_PATH, project_name):
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'ci', 'github_ci.yml'), os.path.join(LOCAL_PATH, project_name, '.github', 'workflows'))
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'ci', 'README.md'), os.path.join(LOCAL_PATH, project_name, '.github', 'workflows'))
 
+    shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'dags', 'conditional_example.py'), os.path.join(LOCAL_PATH, project_name, 'dags'))
+    shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'dags', 'titanic_example.py'), os.path.join(LOCAL_PATH, project_name, 'dags'))
+
 
 def write_readme_file(LOCAL_PATH, project_name):
     with open(os.path.join(LOCAL_PATH, project_name, 'README.md'), 'w+') as outfile:

@@ -64,7 +64,6 @@ jobs:
         cd rony/base_files/infrastructure
         terraform init
         terraform validate
-        terraform plan
 
   package_install:
     name: Test package install

@@ -46,6 +46,21 @@ jobs:
         docker build -t "${PWD##*/}" .
         docker run "${PWD##*/}"
 
+  terraform_validate:
+    name: Terraform validation
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: HashiCorp - Setup Terraform
+      uses: hashicorp/setup-terraform@v1.2.1
+
+    - name: Terraform validate
+      run: |
+        cd rony/base_files/infrastructure
+        terraform validate
+        terraform plan
+
   package_install:
     name: Test package install
     runs-on: ubuntu-latest

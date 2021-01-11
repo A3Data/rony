@@ -29,8 +29,6 @@ then
 fi
 
 
-
-# Zipa o pacote para deploy
 cd $PACKAGE
 
 # Declara variavel que localiza a função lambda para reutilização no código.
@@ -42,9 +40,9 @@ then
 	echo "============================================="
 	echo "Copiando função Handler..."
 	cp ../etl/lambda_function.py .
-	echo "Descompactando arquivo lambda_function_payload.zip"
-	zip -r9 ../infrastructure/lambda_function_payload.zip .
-	echo "Arquivo descompactado com sucesso!"
+	echo "Compactando arquivo lambda_function_payload.zip"
+	zip -r9 ../infrastructure/lambda_function_payload.zip . #Compacta o pacote para o deploy
+	echo "Arquivo compactado com sucesso!"
 	echo "============================================="
 fi
 

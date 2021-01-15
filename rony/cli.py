@@ -3,6 +3,7 @@ import os
 import re
 import sys
 from .writer import copy_files, write_readme_file
+from .validation import get_operational_system, check_version_python, check_python_compile
 from .__init__ import __version__ as version
 
 LOCAL_PATH = os.getcwd()
@@ -48,15 +49,14 @@ def new(project_name):
     copy_files(LOCAL_PATH, project_name)
     write_readme_file(LOCAL_PATH, project_name)
 
-    print(f'Creating virtual environment {project_name}_env')
     os.chdir(project_name)
     env_name = f"{project_name}_env"
-    os.system(f"python -m venv {env_name}")
+    os.environ["ENV_NAME"] = env_name
+    check_python_compile()
 
     # Create git repo
     os.system('git init')
     print("A git repository was created. You should add your files and make your first commit.\n")
-    
 
 
 @click.argument('image_name')

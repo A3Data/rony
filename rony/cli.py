@@ -23,7 +23,7 @@ def cli():
     pass
 
 @cli.command()
-def info():
+def info():    
     """
     Checks that Rony is correctly installed
     """
@@ -33,8 +33,10 @@ def info():
 @cli.command()
 @click.argument('project_name')
 def new(project_name):
-    """
-    Create a new Rony project
+    """Create a new Rony project
+
+    Args:
+        project_name (str): Name to project
     """
     click.echo(f"Creating project {project_name}")
     # Create project folders
@@ -62,10 +64,12 @@ def new(project_name):
 @click.argument('image_name')
 @cli.command()
 def build(image_name):
-    """
-    Build a docker image with given image_name. Only run if you have docker installed.
-    One should be at the root directory.
-    """
+    """Build a docker image with given image_name. Only run if you have docker installed.
+    One should be at the root directory
+
+    Args:
+        image_name (str): Name to image docker
+    """    
     if not os.path.exists('Dockerfile'):
         click.echo("You gotta have a Dockerfile file.")
     else:
@@ -75,10 +79,12 @@ def build(image_name):
 @click.argument('image_name')
 @cli.command()
 def run(image_name):
-    """
-    Run a container with given image_name. 
-    Only run if you have docker installed.
-    """
+    """Run a container with given image_name. 
+    Only run if you have docker installed.]
+
+    Args:
+        image_name (str): Name to image docker
+    """    
     if not os.path.exists('Dockerfile'):
         click.echo("You gotta have a Dockerfile file")
     else:

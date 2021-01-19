@@ -4,6 +4,12 @@ from datetime import datetime
 import rony
 
 def copy_files(LOCAL_PATH, project_name):
+    """Copy files to project
+
+    Args:
+        LOCAL_PATH (str): Local Path
+        project_name (str): Project Name
+    """    
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'etl', 'Dockerfile'), os.path.join(LOCAL_PATH, project_name, 'etl'))
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'etl', 'run.py'), os.path.join(LOCAL_PATH, project_name, 'etl'))
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'etl', 'lambda_function.py'), os.path.join(LOCAL_PATH, project_name, 'etl'))

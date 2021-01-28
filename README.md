@@ -1,4 +1,4 @@
-# Rony - Data Engineering made simple
+![Rony - Data Engineering made simple](img/Logo.jpg)
 
 [![PyPI version fury.io](https://badge.fury.io/py/rony.svg)](https://pypi.python.org/pypi/rony/)
 ![Test package](https://github.com/A3Data/rony/workflows/Test%20package/badge.svg)

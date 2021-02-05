@@ -1,6 +1,7 @@
 include README.md
 include rony/base_files/*
-include rony/base_files/ci/*
+include rony/base_files/ci/github/*
+include rony/base_files/ci/gitlab/*
 include rony/base_files/dags/*
 include rony/base_files/etl/*
 include rony/base_files/infrastructure/*

@@ -22,17 +22,20 @@ def copy_files(LOCAL_PATH, project_name):
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'infrastructure', 'glue_crawler.tf'), os.path.join(LOCAL_PATH, project_name, 'infrastructure'))
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'infrastructure', 'iam.tf'), os.path.join(LOCAL_PATH, project_name, 'infrastructure'))
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'infrastructure', 'lambda.tf'), os.path.join(LOCAL_PATH, project_name, 'infrastructure'))
-    shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'infrastructure', 'main.tf'), os.path.join(LOCAL_PATH, project_name, 'infrastructure'))
+    shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'infrastructure', 'provider.tf'), os.path.join(LOCAL_PATH, project_name, 'infrastructure'))
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'infrastructure', 's3.tf'), os.path.join(LOCAL_PATH, project_name, 'infrastructure'))
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'infrastructure', 'variables.tf'), os.path.join(LOCAL_PATH, project_name, 'infrastructure'))
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'infrastructure', 'ecr.tf'), os.path.join(LOCAL_PATH, project_name, 'infrastructure'))
+    shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'infrastructure', 'terragrunt.hcl'), os.path.join(LOCAL_PATH, project_name, 'infrastructure'))
 
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'scripts', 'build_lambda_package.sh'), os.path.join(LOCAL_PATH, project_name, 'scripts'))
 
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'tests', 'test_lambda.py'), os.path.join(LOCAL_PATH, project_name, 'tests'))
 
-    shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'ci', 'github_ci.yml'), os.path.join(LOCAL_PATH, project_name, '.github', 'workflows'))
-    shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'ci', 'README.md'), os.path.join(LOCAL_PATH, project_name, '.github', 'workflows'))
+    shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'ci', 'github', 'github_ci.yml'), os.path.join(LOCAL_PATH, project_name, '.github', 'workflows'))
+    shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'ci', 'github', 'README.md'), os.path.join(LOCAL_PATH, project_name, '.github', 'workflows'))
+
+    shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'ci', 'gitlab', '.gitlab-ci.yml'), os.path.join(LOCAL_PATH, project_name))
 
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'dags', 'conditional_example.py'), os.path.join(LOCAL_PATH, project_name, 'dags'))
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'dags', 'titanic_example.py'), os.path.join(LOCAL_PATH, project_name, 'dags'))

@@ -8,7 +8,7 @@ resource "aws_iam_role" "glue_role" {
     {
       "Action": "sts:AssumeRole",
       "Principal": {
-        "Service": "ec2.amazonaws.com"
+        "Service": "glue.amazonaws.com"
       },
       "Effect": "Allow",
       "Sid": ""
@@ -142,7 +142,7 @@ resource "aws_iam_role" "lambda" {
     {
       "Action": "sts:AssumeRole",
       "Principal": {
-        "Service": "ec2.amazonaws.com"
+        "Service": "lambda.amazonaws.com"
       },
       "Effect": "Allow",
       "Sid": ""

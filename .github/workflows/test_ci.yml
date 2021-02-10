@@ -31,8 +31,8 @@ jobs:
         BUCKET: "my-bucket"
         REGION: "my-region"
       run: |
-        cd rony/base_files
-        python -m pytest
+        cd rony/base_files/tests
+        python -m pytest test_lambda.py
 
 
   build_docker:

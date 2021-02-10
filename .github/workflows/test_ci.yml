@@ -34,19 +34,19 @@ jobs:
         cd rony/base_files/tests
         python -m pytest test_lambda.py
 
-  build_test_dags:
-    name: Build and test dags
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: 'Validate DAGs'
-      uses: jayamanikharyono/airflow-dag-action@v0.1
-      run: |
-        pip install -U pip
-        pip install pytest
-        cd rony/base_files/tests
-        python -m pytest test_dags.py
+#  build_test_dags:
+#    name: Build and test dags
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v2
+#
+#    - name: 'Validate DAGs'
+#      uses: jayamanikharyono/airflow-dag-action@v0.1
+#      run: |
+#        pip install -U pip
+#        pip install pytest
+#        cd rony/base_files/tests
+#        python -m pytest test_dags.py
 
   build_docker:
     name: Build and test docker image

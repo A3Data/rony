@@ -56,7 +56,7 @@ jobs:
         python-version: 3.8
 
     - name: 'Validate DAGs'
-      uses: jayamanikharyono/airflow-dag-action@v0.1
+      uses: jayamanikharyono/airflow-dag-action
 
     - name: 'Test DAGs'
       run: |

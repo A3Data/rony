@@ -55,10 +55,10 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: 'Airflow - Setup Airflow'
+    - name: 'Validate DAGs'
       uses: jayamanikharyono/airflow-dag-action@v0.1
 
-    - name: 'Validate DAGs'
+    - name: 'Test DAGs'
       run: |
         pip install -U pip
         pip install pytest

@@ -58,6 +58,7 @@ jobs:
         cd rony/base_files/etl
         docker build -t "${PWD##*/}" .
         docker run "${PWD##*/}"
+
   terraform_validate:
     name: Terraform validation
     runs-on: ubuntu-latest
@@ -75,6 +76,30 @@ jobs:
         cd rony/base_files/infrastructure
         terraform init
         terraform validate
+
+  terragrunt_validate:
+    name: Terragrunt validation
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: HashiCorp - Setup Terraform
+      uses: hashicorp/setup-terraform@v1.2.1
+
+    - name: HashiCorp - Setup Terragrunt
+      uses: autero1/action-terragrunt@v1.0.0
+      with:
+        terragrunt_version: 0.28.2
+
+    - name: create zipfile for validation
+      run: |
+        touch rony/base_files/infrastructure/lambda_function_payload.zip
+
+    - name: Terragrunt validate
+      run: |
+        cd rony/base_files/infrastructure
+        terragrunt validate
+
   package_install:
     name: Test package install
     runs-on: ubuntu-latest

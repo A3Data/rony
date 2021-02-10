@@ -56,9 +56,9 @@ jobs:
 #        python-version: 3.8
 
     - name: 'Airflow - Setup Airflow'
-      uses: jayamanikharyono/airflow-dag-action@v0.11-alpha
-      with:
-        dagPaths: rony/base_files/dags
+      uses: jayamanikharyono/airflow-dag-action@v0.1-alpha
+#      with:
+#        dagPaths: rony/base_files/dags
 
 #    - name: 'Validate DAGs'
 #      run: |

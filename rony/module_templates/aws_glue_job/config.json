@@ -1,0 +1,9 @@
+{
+    "info": "Module for deploying glue jobs",
+    "input_info": [
+        ["job_name", "my_glue_job", "Enter your glue job name"],
+        ["bucket", "aws_s3_bucket.dl", "Enter your glue job name"],
+        ["script_s3_key", "/glue_scripts/myscript.py", "Enter your glue job script location"],
+        ["script_local_path", "./my_glue_script.py", "Enter your glue job script location"]
+    ]
+}

@@ -1,0 +1,153 @@
+image:
+  name: ubuntu:latest
+
+stages:
+  - Test package
+  - Test structure
+
+.execute_pipeline:
+  only:
+      - branches
+      - merge_requests
+
+.package_test_py:
+  before_script:
+    - apt-get -qy update && apt-get -qy install python$PYTHON_VERSION python3-pip
+    - ln -s python3 /usr/bin/python && ln -s pip3 /usr/bin/pip
+  script:
+    - python -m pip install --upgrade pip
+    - pip install pytest
+    - pip install coverage
+    - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - pip install .
+    - cd rony/tests
+    - coverage run -m pytest && coverage report -m
+  extends: .execute_pipeline
+
+Test script package lambda:
+  stage: Test package
+  before_script:
+    - apt-get -qy update && apt-get -qy install python3.8 python3-pip zip
+    - ln -s python3 /usr/bin/python && ln -s pip3 /usr/bin/pip
+  script:
+    - pip install -U pip
+    - pip install pytest
+    - cd rony/base_files/tests
+    - python -m pytest test_build_lambda_package.py
+
+Build and test Lambda:
+  stage: Test package
+  variables:
+    BUCKET: "my-bucket"
+    REGION: "xx-xxxx-x"
+  before_script:
+    - apt-get -qy update && apt-get -qy install python3.8 python3-pip
+    - ln -s python3 /usr/bin/python && ln -s pip3 /usr/bin/pip
+  script:
+    - pip install -U pip
+    - pip install -r rony/base_files/etl/lambda_requirements.txt
+    - pip install pytest boto3
+    - cd rony/base_files/tests
+    - python -m pytest test_lambda.py
+  extends: .execute_pipeline
+
+Build and test dags:
+  image: puckel/docker-airflow
+  stage: Test package
+  before_script:
+    - python -m pip install --upgrade pip
+    - pip install pytest
+  script:
+    - cd rony/base_files/tests
+    - python -m pytest test_dags.py
+  extends: .execute_pipeline
+
+Build and test docker image:
+  image: docker:latest
+  stage: Test package
+  services:
+    - docker:dind
+  script:
+    - cd rony/base_files/etl
+    - docker build -t "${PWD##*/}" .
+    - docker run "${PWD##*/}"
+  extends: .execute_pipeline
+
+Terraform validation:
+  stage: Test package
+  before_script:
+    - apt-get -qy update && apt-get -qy install curl zip
+    - curl -sS -L -O https://releases.hashicorp.com/terraform/0.14.6/terraform_0.14.6_linux_amd64.zip && unzip terraform_0.14.6_linux_amd64.zip && mv terraform /usr/local/bin/terraform && chmod u+x /usr/local/bin/terraform
+    - terraform --version
+  script:
+    - touch rony/base_files/infrastructure/lambda_function_payload.zip
+    - cd rony/base_files/infrastructure
+    - terraform init
+    - terraform validate
+  extends: .execute_pipeline
+
+Terragrunt validation:
+  stage: Test package
+  before_script:
+    - apt-get -qy update && apt-get -qy install curl zip
+    - curl -sS -L -O https://releases.hashicorp.com/terraform/0.14.6/terraform_0.14.6_linux_amd64.zip && unzip terraform_0.14.6_linux_amd64.zip && mv terraform /usr/local/bin/terraform && chmod u+x /usr/local/bin/terraform
+    - curl -sS -L -O https://github.com/gruntwork-io/terragrunt/releases/download/v0.28.2/terragrunt_linux_amd64 && mv terragrunt_linux_amd64 /usr/local/bin/terragrunt && chmod u+x /usr/local/bin/terragrunt
+    - terragrunt --version
+  script:
+    - touch rony/base_files/infrastructure/lambda_function_payload.zip
+    - cd rony/base_files/infrastructure
+    - terragrunt validate
+  extends: .execute_pipeline
+
+Test package install (3.6):
+  stage: Test package
+  variables:
+    PYTHON_VERSION: "3.6"
+  extends: .package_test_py
+
+Test package install (3.7):
+  stage: Test package
+  variables:
+    PYTHON_VERSION: "3.7"
+  extends: .package_test_py
+
+Test package install (3.8):
+  stage: Test package
+  variables:
+    PYTHON_VERSION: "3.8"
+  extends: .package_test_py
+
+Test package install (3.9):
+  stage: Test package
+  variables:
+    PYTHON_VERSION: "3.9"
+  extends: .package_test_py
+
+
+Test project structure:
+  stage: Test structure
+  dependencies:
+    - Build and test Lambda
+    - Build and test dags
+    - Build and test docker image
+    - Terraform validation
+    - Terragrunt validation
+    - Test package install (3.6)
+    - Test package install (3.7)
+    - Test package install (3.8)
+    - Test package install (3.9)
+  before_script:
+    - apt-get -qy update && apt-get -qy install python3.8 python3-pip
+    - ln -s python3 /usr/bin/python && ln -s pip3 /usr/bin/pip
+  script:
+    - pip install --upgrade pip
+    - pip install .
+    - rony info
+    - rony new projex
+    - cd projex
+    - cat etl/Dockerfile
+    - cat dags/titanic_example.py
+    - cat infrastructure/s3.tf
+    - cat scripts/build_lambda_package.sh
+  extends: .execute_pipeline
+

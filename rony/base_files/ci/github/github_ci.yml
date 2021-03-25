@@ -62,9 +62,13 @@ jobs:
     
     - name: HashiCorp - Setup Terraform
       uses: hashicorp/setup-terraform@v1.2.1
+      with:
+        terraform_version: 0.14.6
 
     - name: HashiCorp - Setup Terragrunt
       uses: autero1/action-terragrunt@v1.0.0
+      with:
+        terragrunt_version: 0.28.2
     
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1

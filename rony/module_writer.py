@@ -28,7 +28,7 @@ def get_modules(ctx, args, incomplete):
     return [get_module_info(m) for m in module_folders if incomplete in m]
 
 
-def write_module(LOCAL_PATH, module_name):
+def write_module(LOCAL_PATH, module_name, autoconfirm = False ):
     """Copy files to project
 
     Args:
@@ -36,10 +36,13 @@ def write_module(LOCAL_PATH, module_name):
         project_name (str): Project Name
     """
 
-    def get_inputs(input_info):
+    def get_inputs(input_info, autoconfirm = False):
         input_data = {}
         for info in input_info:
-            input_data[info[0]] = click.prompt(info[2], default=info[1])
+            if autoconfirm:
+                input_data[info[0]] = info[1]
+            else:
+                input_data[info[0]] = click.prompt(info[2], default=info[1])
         return input_data
 
     module_path = os.path.join(rony.__path__[0], 'module_templates', module_name)
@@ -53,7 +56,7 @@ def write_module(LOCAL_PATH, module_name):
         data = {'input_info':[]}
 
     # Request input data
-    data['inputs'] = get_inputs(data['input_info'])
+    data['inputs'] = get_inputs(data['input_info'], autoconfirm)
 
     # Process files
     templateLoader = jinja2.FileSystemLoader(searchpath=module_path)
@@ -98,7 +101,7 @@ def write_module(LOCAL_PATH, module_name):
             '\t+  '.join(('\n'+text).splitlines(True)) + '\n'
         )
 
-    if not click.confirm('Do you want to continue?', default = True, abort=True):
+    if (not autoconfirm) and (not click.confirm('Do you want to continue?', default = True, abort=True)):
         return
 
     # Create and append files

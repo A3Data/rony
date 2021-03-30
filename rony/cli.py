@@ -100,5 +100,6 @@ def run(image_name):
 
 @click.argument("module_name", type = click.STRING, autocompletion=get_modules)
 @cli.command()
-def add_module(module_name):
-    write_module(LOCAL_PATH, module_name)
+@click.option('-y','--autoconfirm', is_flag=True)
+def add_module(module_name, autoconfirm):
+    write_module(LOCAL_PATH, module_name, autoconfirm)

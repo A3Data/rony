@@ -32,8 +32,6 @@ def copy_files(LOCAL_PATH, project_name):
 
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'tests', 'test_lambda.py'), os.path.join(LOCAL_PATH, project_name, 'tests'))
 
-    shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'docs', 'docs.md'), os.path.join(LOCAL_PATH, project_name, 'docs'))
-
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'ci', 'github', 'github_ci.yml'), os.path.join(LOCAL_PATH, project_name, '.github', 'workflows'))
     shutil.copy(os.path.join(rony.__path__[0], 'base_files', 'ci', 'github', 'README.md'), os.path.join(LOCAL_PATH, project_name, '.github', 'workflows'))
 
@@ -50,4 +48,12 @@ def write_readme_file(LOCAL_PATH, project_name):
 Project started in {datetime.today().strftime("%B %d, %Y")}.
 
 **Please, complete here information on using and testing this project.**
+""")
+
+
+def write_docs_file(LOCAL_PATH, project_name):
+    with open(os.path.join(LOCAL_PATH, project_name, "docs", 'docs.md'), 'w+') as outfile:
+        outfile.write(f"""# {project_name} project documentation
+
+Develop your project's documetation here!
 """)

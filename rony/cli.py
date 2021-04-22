@@ -44,13 +44,13 @@ def new(project_name):
     """
     click.echo(f"Creating project {project_name}")
     # Create project folders
-    os.makedirs(os.path.join(LOCAL_PATH, project_name, "etl/notebooks"))
+    os.makedirs(os.path.join(LOCAL_PATH, project_name, "etl", "notebooks"))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, "dags"))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, "scripts"))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, "infrastructure"))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, "tests"))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, "docs"))
-    os.makedirs(os.path.join(LOCAL_PATH, project_name, ".github/workflows"))
+    os.makedirs(os.path.join(LOCAL_PATH, project_name, ".github", "workflows"))
 
     # Copy project files
     copy_files(LOCAL_PATH, project_name)

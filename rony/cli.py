@@ -49,6 +49,7 @@ def new(project_name):
     os.makedirs(os.path.join(LOCAL_PATH, project_name, "scripts"))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, "infrastructure"))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, "tests"))
+    os.makedirs(os.path.join(LOCAL_PATH, project_name, "docs"))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, ".github/workflows"))
 
     # Copy project files

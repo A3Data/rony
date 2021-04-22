@@ -2,7 +2,7 @@ import click
 import os
 import re
 import sys
-from .writer import copy_files, write_readme_file
+from .writer import copy_files, write_readme_file, write_docs_file
 from .validation import get_operational_system, check_version_python, check_python_compile
 from .__init__ import __version__ as version
 
@@ -44,16 +44,18 @@ def new(project_name):
     """
     click.echo(f"Creating project {project_name}")
     # Create project folders
-    os.makedirs(os.path.join(LOCAL_PATH, project_name, "etl/notebooks"))
+    os.makedirs(os.path.join(LOCAL_PATH, project_name, "etl", "notebooks"))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, "dags"))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, "scripts"))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, "infrastructure"))
     os.makedirs(os.path.join(LOCAL_PATH, project_name, "tests"))
-    os.makedirs(os.path.join(LOCAL_PATH, project_name, ".github/workflows"))
+    os.makedirs(os.path.join(LOCAL_PATH, project_name, "docs"))
+    os.makedirs(os.path.join(LOCAL_PATH, project_name, ".github", "workflows"))
 
     # Copy project files
     copy_files(LOCAL_PATH, project_name)
     write_readme_file(LOCAL_PATH, project_name)
+    write_docs_file(LOCAL_PATH, project_name)
 
     os.chdir(project_name)
     env_name = f"{project_name}_env"

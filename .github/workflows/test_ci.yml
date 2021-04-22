@@ -117,3 +117,4 @@ jobs:
         cat dags/titanic_example.py
         cat infrastructure/s3.tf
         cat scripts/build_lambda_package.sh
+        cat docs/docs.md

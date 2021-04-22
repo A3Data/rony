@@ -49,3 +49,11 @@ Project started in {datetime.today().strftime("%B %d, %Y")}.
 
 **Please, complete here information on using and testing this project.**
 """)
+
+
+def write_docs_file(LOCAL_PATH, project_name):
+    with open(os.path.join(LOCAL_PATH, project_name, "docs", 'docs.md'), 'w+') as outfile:
+        outfile.write(f"""# {project_name} project documentation
+
+Develop your project's documetation here!
+""")

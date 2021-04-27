@@ -1,8 +1,0 @@
-{
-    "info": "Module for deploying glue jobs and a cron trigger to it",
-    "input_info": [
-        ["trigger_name", "my_trigger", "Insert a name for the trigger"],
-        ["job_name", "glue_job", "Insert the name of the job to be triggered"],
-        ["cron_str", "cron(15 12 * * ? *", "Insert the cron string for the job scheduller"]
-    ]
-}

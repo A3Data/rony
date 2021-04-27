@@ -4,7 +4,7 @@ import re
 import sys
 from .writer import copy_files, write_readme_file
 from .validation import get_operational_system, check_version_python, check_python_compile
-from .module_writer import get_modules, write_module
+from .module_writer import modules_autocomplete, write_module
 from .__init__ import __version__ as version
 
 LOCAL_PATH = os.getcwd()
@@ -98,7 +98,7 @@ def run(image_name):
         os.system(f"docker run --rm {image_name}")
 
 
-@click.argument("module_name", type = click.STRING, autocompletion=get_modules)
+@click.argument("module_name", type = click.STRING, autocompletion=modules_autocomplete)
 @cli.command()
 @click.option('-y','--autoconfirm', is_flag=True)
 def add_module(module_name, autoconfirm):

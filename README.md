@@ -150,6 +150,8 @@ You also have a `scripts` folder with a bash file that builds a lambda deploy pa
 
 ## Contributing
 
+Have a look at our [contributing guide](CONTRIBUTING.md).
+
 Make a pull request with your implementation.
 
 For suggestions, contact us: rony@a3data.com.br

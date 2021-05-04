@@ -47,6 +47,9 @@ Optionally, you can add a json file containing some information about the module
     "instructions":[
         "This will be displayed on the terminal right after the module is added",
         "Each element of this list will be a line on the terminal"
+    ],
+    "developers":[
+        "rony@a3data.com.br"
     ]
 }
 ```
@@ -61,7 +64,9 @@ The `input_info` field of the json contains a list of lists. Each list contains 
 - 2nd element is the default value
 - 3rd element is the text the user will be prompted when being asked for the input
 
-The `instructions` field of the json contains a list strings. The content of this list will be displayed to the users right after the new module is added to their project.
+The `instructions` field of the json contains a list of strings. The content of this list will be displayed to the users right after the new module is added to their project.
+
+The `developers` field of the json contains a list of strings. The content of this list will be displayed to the users right after the new module is added to their project.
 
 
 ### Using jinja template files

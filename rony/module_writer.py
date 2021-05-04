@@ -154,6 +154,8 @@ def write_module(LOCAL_PATH, module_name, autoconfirm = False , custom_inputs  =
     if (not autoconfirm):
         click.secho('INSTRUCTIONS', fg='green', bold = True)
         click.secho('\n'.join(data.get('instructions',[])))
+        click.secho('DEVELOPED BY:', fg='green', bold = True)
+        click.secho(', '.join(data.get('developers',[])))
 
 
     # Create and append files and dirs

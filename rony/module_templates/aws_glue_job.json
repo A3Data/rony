@@ -6,5 +6,8 @@
         " - edit terraform 'glue_scripts' and 'glue_scripts_max_capacity' variables",
         " - make sure to run the script 'scripts/pre_terraform.sh' before each terraform run (add to your CI pipeline)"
     ],
+    "developers": [
+        "rodrigo.torres@a3data.com.br"
+    ],
     "input_info": []
 }

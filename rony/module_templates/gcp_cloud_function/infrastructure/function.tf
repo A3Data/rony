@@ -1,4 +1,4 @@
-# zip o diretorio da function fn_stg_bgq
+
 resource "null_resource" "fn_example_script" {
   triggers     = {
     always_run = timestamp()
@@ -9,14 +9,12 @@ resource "null_resource" "fn_example_script" {
   }
 }
 
-# copia o arquivo para o bucket
 resource "google_storage_bucket_object" "fn_example_script" {
   name       = "fn_example_script"
   bucket     = var.bucket_functions
   source     = "../functions/fn_load_gcs_bgq.zip"
   depends_on = [null_resource.fn_example_script]
 }
-
 
 resource "google_cloudfunctions_function" "fn_example_script" {
   name                  = "fn_example_script"

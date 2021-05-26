@@ -3,7 +3,7 @@ import os
 from packaging import version
 from datetime import datetime
 import json
-import jinja2
+from jinja2 import Template
 import rony
 
 import importlib
@@ -101,8 +101,6 @@ def write_module(LOCAL_PATH, module_name, autoconfirm = False , custom_inputs  =
     data['inputs'].update(custom_inputs)
 
     # Process files
-    templateLoader = jinja2.FileSystemLoader(searchpath=module_path)
-    templateEnv = jinja2.Environment(loader=templateLoader)
     files_to_create = {}
     files_to_append = {}
     dirs_to_create = []
@@ -128,11 +126,11 @@ def write_module(LOCAL_PATH, module_name, autoconfirm = False , custom_inputs  =
             if f == '.ronyignore':
                 continue
 
+            outputText = open(os.path.join(dir_path, f), 'r', encoding='latin-1').read()
+
             if '.tpl.' in f:
-                template = templateEnv.get_template(os.path.join(rel_path, f))
+                template = Template(outputText)
                 outputText = template.render(**data)
-            else:
-                outputText = open(os.path.join(dir_path, f), 'r', encoding='latin-1').read()
 
             local_f_path = os.path.join(local_dir_path, f.replace('.tpl.','.'))
             if os.path.exists(local_f_path):
@@ -183,9 +181,9 @@ def write_module(LOCAL_PATH, module_name, autoconfirm = False , custom_inputs  =
         directory = os.path.dirname(key)
         if not os.path.exists(directory):
             os.makedirs(directory)
-        with open(key,'w') as f:
-            f.write(text)
+        with open(key,'wb') as f:
+            f.write(text.encode('latin-1'))
 
     for key, text in files_to_append.items():
-        with open(key,'a') as f:
-            f.write('\n\n'+text)
+        with open(key,'ab') as f:
+            f.write(('\n\n'+text).encode('latin-1'))

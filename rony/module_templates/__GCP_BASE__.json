@@ -1,0 +1,12 @@
+{
+    "info": "Module for deploying gcp base files",
+    "instructions": [
+        "In the provider.tf file you must specify the path to the credential.json"
+    ],
+    "developers": [
+        "westerley.reis@a3data.com.br"
+    ],
+    "input_info": [
+        ["project_start_date", "19/05/2021", "Initial development gcp modules"]
+    ]
+}

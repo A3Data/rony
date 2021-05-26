@@ -1,5 +1,11 @@
 import click
 import os
+<<<<<<< HEAD
+=======
+import re
+import sys
+from .writer import copy_files, write_readme_file, write_docs_file
+>>>>>>> main
 from .validation import get_operational_system, check_version_python, check_python_compile
 from .module_writer import modules_autocomplete, write_module
 from .cli_aux import get_modules_to_add, get_cli_decorators

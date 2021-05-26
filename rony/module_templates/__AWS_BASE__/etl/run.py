@@ -3,7 +3,7 @@ import argparse
 import pandas as pd
 
 def get_data():
-    return pd.read_csv('https://raw.githubusercontent.com/A3Data/hermione/master/hermione/file_text/train.csv')
+    return pd.read_csv('https://raw.githubusercontent.com/A3Data/hermione/master/hermione/module_templates/__IMPLEMENTED_BASE__/data/raw/train.csv')
 
 def make_transformation(df):
     """

@@ -23,7 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -U pip
-        pip install -r rony/base_files/etl/lambda_requirements.txt
+        pip install -r rony/module_templates/__AWS_BASE__/etl/lambda_requirements.txt
         pip install pytest boto3
     
     - name: Run tests on lambda function
@@ -31,7 +31,7 @@ jobs:
         BUCKET: "my-bucket"
         REGION: "my-region"
       run: |
-        cd rony/base_files
+        cd rony/module_templates/__AWS_BASE__
         python -m pytest
   
 
@@ -42,7 +42,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build image
       run: |
-        cd rony/base_files/etl
+        cd rony/module_templates/__AWS_BASE__/etl
         docker build -t "${PWD##*/}" .
         docker run "${PWD##*/}"
 
@@ -58,11 +58,11 @@ jobs:
 
     - name: create zipfile for validation
       run: |
-        touch rony/base_files/infrastructure/lambda_function_payload.zip
+        touch rony/module_templates/__AWS_BASE__/infrastructure/lambda_function_payload.zip
 
     - name: Terraform validate
       run: |
-        cd rony/base_files/infrastructure
+        cd rony/module_templates/__AWS_BASE__/infrastructure
         terraform init
         terraform validate
 

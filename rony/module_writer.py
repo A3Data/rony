@@ -35,21 +35,25 @@ def get_modules():
         return v1 < v2
 
     parent_dirs = [rony.__path__[0]] + plugins_dirs
+    modules_dirs = [os.path.join(parent, 'module_templates') for parent in parent_dirs]
+    if os.path.exists(os.path.join(os.path.expanduser('~'), 'MyRonyModules')):
+        modules_dirs += [os.path.join(os.path.expanduser('~'), 'MyRonyModules')]
+
     module_paths = {}
     module_info = {}
     module_desc = {}
 
-    for parent_dir in reversed(parent_dirs):
-        for module_name in next(os.walk(os.path.join(parent_dir, 'module_templates')))[1]:
+    for modules_dir in reversed(modules_dirs):
+        for module_name in next(os.walk(modules_dir))[1]:
 
-            tmp_info = get_module_info(module_name, os.path.join(parent_dir, 'module_templates'))
+            tmp_info = get_module_info(module_name, modules_dir)
             if (
                 (module_name in module_paths.keys()) and 
                 comp_modules_version(tmp_info, module_info[module_name])
             ):
                 continue
             else:
-                module_paths[module_name] = os.path.join(parent_dir, 'module_templates', module_name)
+                module_paths[module_name] = os.path.join(modules_dir, module_name)
                 module_info[module_name] = tmp_info
                 module_desc[module_name] = tmp_info.get('info', '')
 

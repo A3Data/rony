@@ -108,7 +108,7 @@ To deal with that a empty file named `.ronyignore` needs to be added to empty fo
 Similarly `.gitignore` files inside the templates would be processed by git and other files could be mistakenly ignored by git. To deal with that the `.gitignore` can be renamed to `.tpl.gitignore`. They will be ignored by git, but will be renamed by Rony when populating the user's project.
 
 
-### Using "diff-2-module" command to create
+### Using "diff-2-module" command to create modules
 
 The diff-2-module command facilitates the creation of new modules.
 

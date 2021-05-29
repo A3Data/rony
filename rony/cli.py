@@ -1,8 +1,8 @@
 import click
 import os
 from .validation import get_operational_system, check_version_python, check_python_compile
-from .module_writer import modules_autocomplete, write_module
-from .cli_aux import get_modules_to_add, get_cli_decorators
+from .module_writer import modules_autocomplete, write_module, create_module_from_diff
+from .cli_aux import get_modules_to_add, get_cli_decorators, get_autocomplete
 from .__init__ import __version__ as version
 
 from datetime import datetime
@@ -36,7 +36,7 @@ def info():
 
 @cli.command()
 @click.argument("project_name")
-@click.option('--provider', '-p', default = 'aws')
+@click.option('--provider', '-p', default = 'aws', autocompletion = get_autocomplete('new', 'provider'))
 @click.pass_context
 def new(ctx, project_name, **kwargs):
     """Create a new Rony project

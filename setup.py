@@ -32,6 +32,7 @@ setup(
         'Click',
         'Jinja2',
         'packaging',
+        'unidiff',
     ],
     entry_points='''
         [console_scripts]

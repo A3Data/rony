@@ -8,6 +8,8 @@ import rony
 
 import importlib
 import pkgutil
+import subprocess
+from unidiff import PatchSet
 
 plugins_dirs = [
     importlib.import_module(name).__path__[0]
@@ -191,3 +193,54 @@ def write_module(LOCAL_PATH, module_name, autoconfirm = False , custom_inputs  =
     for key, text in files_to_append.items():
         with open(key,'ab') as f:
             f.write(('\n\n'+text).encode('latin-1'))
+
+
+def create_module_from_diff(module_name):
+
+    if subprocess.call(["git", "branch"], stderr=subprocess.STDOUT, stdout=open(os.devnull, 'w')) != 0:
+        click.Abort('Current directory is not a git repository')
+
+    patch_file = f'.rony_{module_name}.patch'
+    module_path = os.path.join(os.path.expanduser('~'), 'MyRonyModules', module_name)
+
+    p = subprocess.call(["git", "diff",'--no-prefix'], stdout=open(patch_file, 'w'))
+
+    patch_set = PatchSet.from_filename(patch_file)
+    
+    for patched_file in patch_set:
+
+        file_path = patched_file.path
+        added_lines = []
+        for hunk in patched_file:
+            for line in hunk:
+                if line.is_added:
+                    added_lines.append(line.value)
+        
+        module_file_path = os.path.join(module_path, file_path)
+        module_dir_path = os.path.dirname(module_file_path)
+
+        if not os.path.exists(module_dir_path):
+            os.makedirs(module_dir_path)
+        
+        with open(module_file_path,'w') as f:
+            f.write(''.join(added_lines))
+
+    os.remove(patch_file)
+
+    info = click.prompt('Please your modules description', default='')
+    inst = click.prompt('Please instructions to be displayed to the users after they add this module', default='')
+    developer = click.prompt('Please enter your email', default='')
+
+    with open(module_path + '.json', 'w') as f:
+        f.write(json.dumps(
+        {
+            "info": info,
+            'instructions': inst,
+            "developers": developer,
+            "input_info": [],
+            "version":"0.0.0"
+        },
+        sort_keys=True,
+        indent=4,
+        separators=(',', ': ')
+        ))

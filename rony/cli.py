@@ -123,3 +123,15 @@ def add_module(module_name, autoconfirm):
         module_name (str): Name of the module to be added
     """
     write_module(LOCAL_PATH, module_name, autoconfirm)
+
+
+@click.argument("module_name", type = click.STRING, autocompletion=modules_autocomplete)
+@cli.command()
+def diff_2_module(module_name):
+    """Add new module to rony project
+    One should be at the root directory
+
+    Args:
+        module_name (str): Name of the module to be added
+    """
+    create_module_from_diff(module_name)

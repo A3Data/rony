@@ -108,6 +108,17 @@ To deal with that a empty file named `.ronyignore` needs to be added to empty fo
 Similarly `.gitignore` files inside the templates would be processed by git and other files could be mistakenly ignored by git. To deal with that the `.gitignore` can be renamed to `.tpl.gitignore`. They will be ignored by git, but will be renamed by Rony when populating the user's project.
 
 
+### Using "diff-2-module" command to create
+
+The diff-2-module command facilitates the creation of new modules.
+
+It translates all the uncommitted changes of a repo into a new module.
+
+To create a new module, just create a project using rony, commit all the files, then make the changes your module should make.
+Run the command `rony diif-2-module <your module name>` inside the project directory, and answer the questions prompted. The new module will be saved to the folder MyRonyModules, in your users home directory.
+
+Always check the module create, as this is a feature under development.
+
 ## Creating plugins for Rony
 
 It is possible to create plugins to extend Rony's functionality. Rony considers a plugin any package which name starts with `rony_`.

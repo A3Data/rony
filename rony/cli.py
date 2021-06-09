@@ -1,8 +1,8 @@
 import click
 import os
 from .validation import get_operational_system, check_version_python, check_python_compile
-from .module_writer import modules_autocomplete, write_module
-from .cli_aux import get_modules_to_add, get_cli_decorators
+from .module_writer import modules_autocomplete, write_module, create_module_from_diff
+from .cli_aux import get_modules_to_add, get_cli_decorators, get_autocomplete
 from .__init__ import __version__ as version
 
 from datetime import datetime
@@ -36,7 +36,7 @@ def info():
 
 @cli.command()
 @click.argument("project_name")
-@click.option('--provider', '-p', default = 'aws')
+@click.option('--provider', '-p', default = 'aws', autocompletion = get_autocomplete('new', 'provider'))
 @click.pass_context
 def new(ctx, project_name, **kwargs):
     """Create a new Rony project
@@ -123,3 +123,15 @@ def add_module(module_name, autoconfirm):
         module_name (str): Name of the module to be added
     """
     write_module(LOCAL_PATH, module_name, autoconfirm)
+
+
+@click.argument("module_name", type = click.STRING, autocompletion=modules_autocomplete)
+@cli.command()
+def diff_2_module(module_name):
+    """Add new module to rony project
+    One should be at the root directory
+
+    Args:
+        module_name (str): Name of the module to be added
+    """
+    create_module_from_diff(module_name)

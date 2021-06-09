@@ -39,7 +39,7 @@ def get_modules_to_add(command, opts, ctx):
             all_modules.append('__AWS_BASE__')
 
     for plugin in plugins:
-        if hasattr(plugin, 'cli_aux.get_modules_to_add') and hasattr(plugin.cli_aux, 'get_modules_to_add'):
+        if hasattr(plugin, 'cli_aux') and hasattr(plugin.cli_aux, 'get_modules_to_add'):
             all_modules += plugin.cli_aux.get_modules_to_add(command, opts, ctx)
 
     return all_modules

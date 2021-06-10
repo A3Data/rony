@@ -1,21 +1,3 @@
-
-resource "null_resource" "fn_example_script" {
-  triggers     = {
-    always_run = timestamp()
-  }
-
-  provisioner "local-exec" {
-    command    = "zip -urj ../etl/fn_example_script.zip ../etl/fn_example_script"
-  }
-}
-
-resource "google_storage_bucket_object" "fn_example_script" {
-  name       = "fn_example_script"
-  bucket     = var.bucket_functions
-  source     = "../functions/fn_load_gcs_bgq.zip"
-  depends_on = [null_resource.fn_example_script]
-}
-
 resource "google_cloudfunctions_function" "fn_example_script" {
   name                  = "fn_example_script"
   runtime               = "python38"

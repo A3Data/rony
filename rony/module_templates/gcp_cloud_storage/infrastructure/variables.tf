@@ -1,4 +1,4 @@
-variable "bucket_name" {
-  default       = "bucket_name"
+variable "bucket_datalake" {
+  default       = "datalake_rony"
   description   = ""
 }

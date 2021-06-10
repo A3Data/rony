@@ -1,11 +1,13 @@
-resource "google_storage_bucket" "bucket_name" {
-  name          = var.bucket_name
-  location      = var.location
+resource "google_storage_bucket" "bucket_datalake" {
+  name          = var.bucket_datalake
+  location      = var.region_id
   storage_class = "STANDARD"
 }
 
-resource "google_storage_bucket_object" "empty_folder" {
-  name          = "empty_folder/"
-  content       = "Empty folder"
-  bucket        = var.bucket_name
+# create empty folder inside the bucket
+resource "google_storage_bucket_object" "landing_zone" {
+  name          = "landing_zone/"
+  content       = "Landing_zone"
+  bucket        = var.bucket_datalake
+  depends_on    = [google_storage_bucket.bucket_datalake]
 }

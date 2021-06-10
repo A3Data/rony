@@ -1,6 +1,8 @@
+# Backend configuration require a google storage bucket.
 terraform {
   backend "gcs" {
-    bucket         = "my-bucket-state-backend"
-    prefix         = "prod"
+    bucket        = ""
+    prefix        = "prod"
+    credentials   = "../config/service-account.json"
   }
 }

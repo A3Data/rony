@@ -9,7 +9,3 @@ variable "region_id" {
 variable "zone_id" {
   default       = ""
 }
-
-variable "location" {
-  default       = "US"
-}

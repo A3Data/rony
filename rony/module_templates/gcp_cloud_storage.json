@@ -6,12 +6,6 @@
     "developers": [
         "westerley.reis@a3data.com.br"
     ],
-    "input_info": [
-        [
-            "project_start_date",
-            "09/06/2021",
-            "Initial development gcp modules"
-        ]
-    ],
+    "input_info": [,
     "version": "0.0.1"
 }

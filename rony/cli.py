@@ -45,19 +45,23 @@ def new(ctx, project_name, **kwargs):
         project_name (str): Name to project
         kwargs (dict): Flags and options
     """
+
+    # Getting all modules to be added
+    module_names = get_modules_to_add('new', kwargs, ctx)
+
+    if not module_names:
+        raise click.UsageError('Invalid parameters. Please review your command')
+
     click.echo(f"Creating project {project_name}")
+
+    # Creating project directory
+    os.makedirs(os.path.join(LOCAL_PATH, project_name))
 
     # Inputs to be passed to all modules
     custom_inputs = {
         'project_name':project_name, 
         "project_start_date": datetime.today().strftime("%B %d, %Y")
     }    
-
-    # Creating project directory
-    os.makedirs(os.path.join(LOCAL_PATH, project_name))
-
-    # Getting all modules to be added
-    module_names = get_modules_to_add('new', kwargs, ctx)
 
     # Running modules
     for module_name in set(module_names):

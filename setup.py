@@ -30,7 +30,9 @@ setup(
       license='Apache License 2.0',
     install_requires=[
         'Click',
-        'Jinja2'
+        'Jinja2',
+        'packaging',
+        'unidiff',
     ],
     entry_points='''
         [console_scripts]

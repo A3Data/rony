@@ -235,8 +235,8 @@ def create_module_from_diff(module_name):
         f.write(json.dumps(
         {
             "info": info,
-            'instructions': inst,
-            "developers": developer,
+            'instructions': [inst],
+            "developers": [developer],
             "input_info": [],
             "version":"0.0.0"
         },

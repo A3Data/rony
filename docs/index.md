@@ -46,6 +46,7 @@ QuickStart
 :hidden:
 :caption: Usage
 
+ProjectStructure
 CI
 AWS
 GCP

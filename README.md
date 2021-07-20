@@ -50,7 +50,7 @@ You are free to change this decisions as you wish (that's the whole point of the
 pip install -U rony
 ```
 
-### Enabling autocompletition (linux users):
+### Enabling autocompletion (unix users):
 
 For bash:
 

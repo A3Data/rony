@@ -34,9 +34,12 @@ def info():
     """
     click.echo(logo)
 
+
 @cli.command()
 @click.argument("project_name")
-@click.option('--provider', '-p', default = 'aws', autocompletion = get_autocomplete('new', 'provider'))
+@click.option(
+    "--provider", "-p", default="aws", autocompletion=get_autocomplete("new", "provider")
+)
 @click.pass_context
 def new(ctx, project_name, **kwargs):
     """Create a new Rony project
@@ -47,10 +50,10 @@ def new(ctx, project_name, **kwargs):
     """
 
     # Getting all modules to be added
-    module_names = get_modules_to_add('new', kwargs, ctx)
+    module_names = get_modules_to_add("new", kwargs, ctx)
 
     if not module_names:
-        raise click.UsageError('Invalid parameters. Please review your command')
+        raise click.UsageError("Invalid parameters. Please review your command")
 
     click.echo(f"Creating project {project_name}")
 
@@ -59,9 +62,9 @@ def new(ctx, project_name, **kwargs):
 
     # Inputs to be passed to all modules
     custom_inputs = {
-        'project_name':project_name, 
-        "project_start_date": datetime.today().strftime("%B %d, %Y")
-    }    
+        "project_name": project_name,
+        "project_start_date": datetime.today().strftime("%B %d, %Y"),
+    }
 
     # Running modules
     for module_name in set(module_names):
@@ -71,7 +74,7 @@ def new(ctx, project_name, **kwargs):
             True,
             custom_inputs,
         )
-        
+
     os.chdir(project_name)
     env_name = f"{project_name}_env"
     os.environ["ENV_NAME"] = env_name
@@ -83,8 +86,10 @@ def new(ctx, project_name, **kwargs):
         "A git repository was created. You should add your files and make your first commit.\n"
     )
 
-for dec in get_cli_decorators('new'):
+
+for dec in get_cli_decorators("new"):
     new = dec(new)
+
 
 @click.argument("image_name")
 @cli.command()
@@ -116,8 +121,8 @@ def run(image_name):
         os.system(f"docker run --rm {image_name}")
 
 
-@click.argument("module_name", type = click.STRING, autocompletion=modules_autocomplete)
-@click.option('-y','--autoconfirm', is_flag=True)
+@click.argument("module_name", type=click.STRING, autocompletion=modules_autocomplete)
+@click.option("-y", "--autoconfirm", is_flag=True)
 @cli.command()
 def add_module(module_name, autoconfirm):
     """Add new module to rony project
@@ -129,7 +134,7 @@ def add_module(module_name, autoconfirm):
     write_module(LOCAL_PATH, module_name, autoconfirm)
 
 
-@click.argument("module_name", type = click.STRING, autocompletion=modules_autocomplete)
+@click.argument("module_name", type=click.STRING, autocompletion=modules_autocomplete)
 @cli.command()
 def diff_2_module(module_name):
     """Add new module to rony project

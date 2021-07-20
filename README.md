@@ -55,13 +55,13 @@ pip install -U rony
 For bash:
 
 ```bash
-echo 'eval "$(_RONY_COMPLETE=source_bash rony)"' >> ~/.bashrc
+echo 'eval "$(_RONY_COMPLETE=bash_source rony)"' >> ~/.bashrc
 ```
 
 For Zsh:
 
 ```bash
-echo 'eval "$(_RONY_COMPLETE=source_zsh rony)"' >> ~/.zshrc
+echo 'eval "$(_RONY_COMPLETE=zsh_source rony)"' >> ~/.zshrc
 ```
 
 # How do I use Rony?

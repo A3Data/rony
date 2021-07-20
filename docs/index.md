@@ -59,5 +59,6 @@ GCP
 :caption: Contributing
 
 Contributing
+ChangeLog
 
 ```

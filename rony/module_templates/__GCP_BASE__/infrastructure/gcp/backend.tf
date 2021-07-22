@@ -3,6 +3,6 @@ terraform {
   backend "gcs" {
     bucket        = ""
     prefix        = "prod"
-    credentials   = "../config/service-account.json"
+    credentials   = "../../config/service-account.json"
   }
 }

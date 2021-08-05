@@ -2,6 +2,7 @@
 
 ## Version 0.2.1 (dev)
 
+- Added CI workflows module for Gitlab and Github
 - Added support for new provider - GCP
   - Modules:
     - \_\_GCP_BASE__

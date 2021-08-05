@@ -39,6 +39,7 @@ def get_modules_to_add(command, opts, ctx):
 
         if opts["provider"] == "aws":
             all_modules.append("__AWS_BASE__")
+            all_modules.append("CI_workflows")
 
         if opts["provider"] == "gcp":
 

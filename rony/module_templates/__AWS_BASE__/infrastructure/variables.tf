@@ -1,15 +1,27 @@
-variable "aws_region" {
-  default = "us-east-1"
+variable "project_id" {
+  default       = ""
 }
 
-variable "base_bucket_name" {
-  default = "my-bucket"
+variable "region_id" {
+  default       = ""
 }
 
-variable "account" {
-  default = 123456789
+variable "zone_id" {
+  default       = ""
 }
 
-variable "lambda_function_name" {
-  default = "my-lambda"
+# Prefix configuration and project common tags
+locals {
+  prefix = "${var.prefix}-${terraform.workspace}"
+  common_tags = {
+    Project        = "Datalake"
+    ManagedBy      = "Terraform"
+    Department     = "systems",
+    Provider       = "A3DATA",
+    Owner          = "Data Engineering"
+    BusinessUnit   = "Data"
+    Billing        = "Infrastructure"
+    Environment    = terraform.workspace
+    UserEmail      = "rony@a3data.com.br"
+  }
 }

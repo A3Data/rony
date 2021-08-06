@@ -55,7 +55,7 @@ def new(ctx, project_name, **kwargs):
     if not module_names:
         raise click.UsageError("Invalid parameters. Please review your command")
 
-    click.echo(f"Creating project {project_name}")
+    click.echo(f"Creating project teste {project_name}")
 
     # Creating project directory
     os.makedirs(os.path.join(LOCAL_PATH, project_name))

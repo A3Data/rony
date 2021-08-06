@@ -1,3 +1,22 @@
+resource "aws_iam_role" "lambda_decompress" {
+  name        = "Role_Lambda_decompress_S3"
+  path        = "/"
+  description = "Provides write permissions to CloudWatch Logs and S3 Full Access"
+  policy      = file("./iam/Role_Lambda_decompress_S3.json")
+}
+
+resource "aws_iam_policy" "lambda_decompress" {
+  name        = "Policy_Lambda_decompress_S3"
+  path        = "/"
+  description = "Provides write permissions to CloudWatch Logs and S3 Full Access"
+  policy      = file("./iam/Policy_Lambda_decompress_S3.json")
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_attach" {
+  role       = aws_iam_role.lambda_decompress.name
+  policy_arn = aws_iam_policy.lambda_decompress.arn
+}
+
 resource "aws_glue_crawler" "glue_crawler" {
   count         = length(var.database_names)
   database_name = var.database_names[count.index]

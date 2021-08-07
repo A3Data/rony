@@ -10,7 +10,7 @@ resource "google_bigquery_table" "table" {
   dataset_id          = "dataset_name"
   friendly_name       = "table_friendly_name"
   table_id            = "table_name"
-  schema              = file("../schemas/iris.json")
+  schema              = file("../../schemas/iris.json")
   description         = "Example of table"
   project             = var.project_id
   deletion_protection = false

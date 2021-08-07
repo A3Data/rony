@@ -1,15 +1,17 @@
-resource "google_cloudfunctions_function" "fn_example_script" {
-  name                  = "fn_example_script"
+resource "google_cloudfunctions_function" "write_file_gcs_bgq" {
+  name                  = "write_file_gcs_bgq"
   runtime               = "python38"
   available_memory_mb   = 2048
-  source_archive_bucket = google_storage_bucket_object.fn_example_script.bucket
-  source_archive_object = google_storage_bucket_object.fn_example_script.name
+  source_archive_bucket = google_storage_bucket_object.write_file_gcs_bgq.bucket
+  source_archive_object = google_storage_bucket_object.write_file_gcs_bgq.name
   timeout               = 540
-  entry_point           = "fn_example_script"
+  entry_point           = "write_file_gcs_bgq"
   environment_variables = {
-    name   = "fn_example_script"
+    project_id   = var.project_id
+    dataset_name = google_bigquery_dataset.dataset.dataset_id
+    table_name   = google_bigquery_table.table.table_id
   }
-  depends_on = [google_storage_bucket_object.fn_example_script]
+  depends_on = [google_storage_bucket_object.write_file_gcs_bgq]
 
   event_trigger {
     event_type  = "google.storage.object.finalize"

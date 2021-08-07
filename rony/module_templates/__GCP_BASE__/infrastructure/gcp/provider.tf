@@ -5,3 +5,7 @@ provider "google" {
   zone        = var.zone_id
 }
 
+locals {
+  uuid = uuid()
+}
+

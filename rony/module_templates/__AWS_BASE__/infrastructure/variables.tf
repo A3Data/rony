@@ -1,15 +1,14 @@
-variable "project_id" {
-  default       = ""
-}
-
 variable "region_id" {
+  default       = "us-east-1"
+}
+
+variable "prefix" {
   default       = ""
 }
 
-variable "zone_id" {
-  default       = ""
+variable "account" {
+  default = 123456789
 }
-
 # Prefix configuration and project common tags
 locals {
   prefix = "${var.prefix}-${terraform.workspace}"

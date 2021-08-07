@@ -1,8 +1,8 @@
 resource "aws_iam_role" "lambda_decompress" {
-  name        = "Role_Lambda_decompress_S3"
-  path        = "/"
-  description = "Provides write permissions to CloudWatch Logs and S3 Full Access"
-  policy      = file("./permissions/Role_Lambda_decompress_S3.json")
+  name                    = "Role_Lambda_decompress_S3"
+  path                    = "/"
+  description             = "Provides write permissions to CloudWatch Logs and S3 Full Access"
+  assume_role_policy      = file("./permissions/Role_Lambda_decompress_S3.json")
 }
 
 resource "aws_iam_policy" "lambda_decompress" {

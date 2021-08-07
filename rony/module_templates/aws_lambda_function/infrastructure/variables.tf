@@ -1,4 +1,4 @@
 variable "bucket_functions" {
-  default       = "temp_functions_rony"
-  description   = ""
+  description = "Create S3 bucket for lambda functions"
+  default     = "temp-functions-rony"
 }

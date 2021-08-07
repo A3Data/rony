@@ -7,7 +7,3 @@ variable "bucket_names" {
                   "delivery-zone"
                 ]
 }
-
-variable "account" {
-  default = 123456789
-}

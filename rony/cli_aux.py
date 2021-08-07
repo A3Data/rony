@@ -41,6 +41,13 @@ def get_modules_to_add(command, opts, ctx):
             all_modules.append("__AWS_BASE__")
             all_modules.append("CI_workflows")
 
+            if click.confirm("Add S3 module?", default=True):
+                all_modules.append("aws_simple_storage_service")
+            if click.confirm("Add GLUE CRAWLER module?", default=True):
+                all_modules.append("aws_glue_crawler")
+            if click.confirm("Add LAMBDA FUNCTION module?", default=True):
+                all_modules.append("aws_lambda_function")
+
         if opts["provider"] == "gcp":
 
             all_modules.append("__GCP_BASE__")

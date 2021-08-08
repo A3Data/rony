@@ -10,7 +10,7 @@ resource "aws_s3_bucket_object" "glue_script_s3_object" {
 resource "aws_glue_job" "glue_job" {
   count        = length(var.glue_scripts)
   name         = var.glue_scripts[count.index]
-  role_arn     = aws_iam_role.glue_role.arn
+  role_arn     = aws_iam_role.glue_job.arn
   max_capacity = var.glue_scripts_max_capacity[count.index]
   glue_version = "2.0"
   command {

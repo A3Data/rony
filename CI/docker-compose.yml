@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+
+  rony-ci: 
+    image: ratorres7/rony-ci-test:0.0.1-terraform1.0.3
+    entrypoint: 
+      - 'sh'
+    volumes:
+      - ../:/repo_dir
+    working_dir: /repo_dir

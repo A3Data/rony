@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8]
+        python-version: [3.6, 3.7, 3.8, 3.9]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -54,3 +54,22 @@ jobs:
         run: |
           cd rony/tests
           coverage run -m pytest && coverage report -m
+      - name: Create project
+        run: |
+          rony new teste -y
+
+  package_install_windows:
+    strategy:
+      matrix:
+        os: [windows-latest]
+        python-version: [3.6, 3.7, 3.8, 3.9]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install package
+        run: |
+          python -m venv venv3
+          pip install .
+      - name: Create project
+        run: |
+          rony new teste -y

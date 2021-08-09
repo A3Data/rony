@@ -18,6 +18,7 @@
   - Lambda
 - Added -y/--autoconfirm flag to new command, in order to skip user inputs
 - Added CI scripts to run all the testing, linting and validation scripts on every module
+  - Added jobs to test package installation on windows
 - Added docker-compose to run rony CI jobs locally
 - ReadTheDocs
   - Added ReadTheDocs documentation
@@ -32,4 +33,3 @@
 - New command can be extended via rony plugins
 - Added "add-module" command
   - Possibility to add modules to existing rony project
-

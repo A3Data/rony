@@ -45,7 +45,6 @@ def get_modules():
     module_desc = {}
 
     for modules_dir in reversed(modules_dirs):
-        print(next(os.walk(modules_dir)))
         for module_name in next(os.walk(modules_dir))[1]:
 
             tmp_info = get_module_info(module_name, modules_dir)

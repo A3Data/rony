@@ -54,6 +54,9 @@ jobs:
         run: |
           cd rony/tests
           coverage run -m pytest && coverage report -m
+      - name: Create project
+        run: |
+          rony new teste -y
 
   package_install_windows:
     strategy:

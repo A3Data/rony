@@ -38,28 +38,43 @@ def get_modules_to_add(command, opts, ctx):
     if command == "new":
 
         if opts["provider"] == "aws":
-            all_modules.append("__AWS_BASE__")
-            all_modules.append("CI_workflows")
 
-            if click.confirm("Add S3 module?", default=True):
-                all_modules.append("aws_simple_storage_service")
-            if click.confirm("Add GLUE CRAWLER module?", default=True):
-                all_modules.append("aws_glue_crawler")
-            if click.confirm("Add LAMBDA FUNCTION module?", default=True):
-                all_modules.append("aws_lambda_function")
+            all_modules += ["__AWS_BASE__", "CI_workflows"]
+
+            if opts["autoconfirm"]:
+                all_modules += [
+                    "aws_simple_storage_service",
+                    "aws_glue_crawler",
+                    "aws_lambda_function",
+                ]
+            else:
+                if click.confirm("Add S3 module?", default=True):
+                    all_modules.append("aws_simple_storage_service")
+                if click.confirm("Add GLUE CRAWLER module?", default=True):
+                    all_modules.append("aws_glue_crawler")
+                if click.confirm("Add LAMBDA FUNCTION module?", default=True):
+                    all_modules.append("aws_lambda_function")
 
         if opts["provider"] == "gcp":
 
             all_modules.append("__GCP_BASE__")
 
-            if click.confirm("Add CLOUD_STORAGE module?", default=True):
-                all_modules.append("gcp_cloud_storage")
-            if click.confirm("Add BIGQUERY module?", default=True):
-                all_modules.append("gcp_bigquery")
-            if click.confirm("Add CLOUD FUNCTION module?", default=True):
-                all_modules.append("gcp_cloud_function")
-            if click.confirm("Add PUBSUB module?", default=True):
-                all_modules.append("gcp_pubsub")
+            if opts["autoconfirm"]:
+                all_modules += [
+                    "gcp_cloud_storage",
+                    "gcp_bigquery",
+                    "gcp_cloud_function",
+                    "gcp_pubsub",
+                ]
+            else:
+                if click.confirm("Add CLOUD_STORAGE module?", default=True):
+                    all_modules.append("gcp_cloud_storage")
+                if click.confirm("Add BIGQUERY module?", default=True):
+                    all_modules.append("gcp_bigquery")
+                if click.confirm("Add CLOUD FUNCTION module?", default=True):
+                    all_modules.append("gcp_cloud_function")
+                if click.confirm("Add PUBSUB module?", default=True):
+                    all_modules.append("gcp_pubsub")
 
     for plugin in plugins:
         if hasattr(plugin, "cli_aux") and hasattr(plugin.cli_aux, "get_modules_to_add"):

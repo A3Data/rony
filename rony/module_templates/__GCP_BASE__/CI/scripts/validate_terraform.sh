@@ -3,7 +3,7 @@
 cd infrastructure/gcp/
 terraform init -backend=false
 terraform validate
-terraform fmt -check
+# terraform fmt -check
 cd ../../
 
 #####################

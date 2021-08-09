@@ -1,15 +1,8 @@
 resource "aws_iam_role" "glue_role" {
-<<<<<<< HEAD:rony/module_templates/aws_glue_crawler/infrastructure/aws/iam.tf
   name                    = "${var.prefix}_Role_GlueCrawler"
   path                    = "/"
   description             = "Provides write permissions to CloudWatch Logs and S3 Full Access"
   assume_role_policy      = file("./permissions/Role_GlueCrawler.json")
-=======
-  name               = "Role_GlueCrawler"
-  path               = "/"
-  description        = "Provides write permissions to CloudWatch Logs and S3 Full Access"
-  assume_role_policy = file("./permissions/Role_GlueCrawler.json")
->>>>>>> daf0fae4887af821d5bdf26960b100797f88781f:rony/module_templates/aws_glue_crawler/infrastructure/iam.tf
 }
 
 resource "aws_iam_policy" "glue_policy" {

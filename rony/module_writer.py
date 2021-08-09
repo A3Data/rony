@@ -37,16 +37,15 @@ def get_modules():
 
     parent_dirs = [rony.__path__[0]] + plugins_dirs
     modules_dirs = [os.path.join(parent, "module_templates") for parent in parent_dirs]
-    print(modules_dirs)
     if os.path.exists(os.path.join(os.path.expanduser("~"), "MyRonyModules")):
         modules_dirs += [os.path.join(os.path.expanduser("~"), "MyRonyModules")]
-    print(modules_dirs)
 
     module_paths = {}
     module_info = {}
     module_desc = {}
 
     for modules_dir in reversed(modules_dirs):
+        print(next(os.walk(modules_dir)))
         for module_name in next(os.walk(modules_dir))[1]:
 
             tmp_info = get_module_info(module_name, modules_dir)

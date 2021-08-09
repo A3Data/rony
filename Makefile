@@ -15,3 +15,7 @@
 .PHONY: tf-validate
 tf-validate:
 	docker-compose -f ./CI/docker-compose.yml run --rm rony-ci ./CI/scripts/validate_terraform.sh $(module)
+
+.PHONY: test-lint
+ test-lint:
+	docker-compose -f ./CI/docker-compose.yml run --rm rony-ci ./CI/scripts/test_and_lint.sh $(module)

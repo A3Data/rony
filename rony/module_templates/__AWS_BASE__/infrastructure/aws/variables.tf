@@ -3,12 +3,13 @@ variable "region_id" {
 }
 
 variable "prefix" {
-  default = ""
+  default = "dev"
 }
 
 variable "account" {
   default = 123456789
 }
+
 # Prefix configuration and project common tags
 locals {
   prefix = "${var.prefix}-${terraform.workspace}"

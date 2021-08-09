@@ -1,6 +1,6 @@
 resource "aws_s3_bucket_object" "glue_script_s3_object" {
   count  = length(var.glue_scripts)
-  bucket = aws_s3_bucket.dl.id
+  bucket = "${var.prefix}-${aws_s3_bucket.dl.id}"
   key    = "/.glue_scripts/${var.glue_scripts[count.index]}.py"
   source = ".glue_scripts/${var.glue_scripts[count.index]}.py"
   etag   = filemd5(".glue_scripts/${var.glue_scripts[count.index]}.py")

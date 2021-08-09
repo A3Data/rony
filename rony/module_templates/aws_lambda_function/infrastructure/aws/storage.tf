@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "bucket_functions" {
-  bucket       = "${var.prefix}-${var.bucket_functions}-${var.account}"
-  acl          = "private"
+  bucket = "${var.prefix}-${var.bucket_functions}-${var.account}"
+  acl    = "private"
 
   tags = local.common_tags
 
@@ -19,6 +19,6 @@ resource "null_resource" "fn_example_script" {
   }
 
   provisioner "local-exec" {
-    command    = "zip -urj ../../functions/fn_example_script.zip ../../functions/fn_example_script"
+    command = "zip -urj ../../functions/fn_example_script.zip ../../functions/fn_example_script"
   }
 }

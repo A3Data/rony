@@ -1,9 +1,9 @@
 resource "google_bigquery_dataset" "dataset" {
-  dataset_id                  = "rony_lab"
-  friendly_name               = "rony_lab"
-  description                 = "Rony laboratory"
-  location                    = var.region_id
-  delete_contents_on_destroy  = true
+  dataset_id                 = "rony_lab"
+  friendly_name              = "rony_lab"
+  description                = "Rony laboratory"
+  location                   = var.region_id
+  delete_contents_on_destroy = true
 }
 
 resource "google_bigquery_table" "table" {

@@ -14,7 +14,7 @@ resource "google_cloudfunctions_function" "write_file_gcs_bgq" {
   depends_on = [google_storage_bucket_object.write_file_gcs_bgq]
 
   event_trigger {
-    event_type  = "google.storage.object.finalize"
-    resource    = "${var.bucket_names[0]}-${var.account}"
+    event_type = "google.storage.object.finalize"
+    resource   = "${var.bucket_names[0]}-${var.account}"
   }
 }

@@ -7,8 +7,8 @@ resource "google_storage_bucket" "bucket_datalake" {
 
 # folder inside landing-zone
 resource "google_storage_bucket_object" "public_dataset" {
-  name    = "public_dataset/"
-  content = "folder"
-  bucket  = "${var.bucket_names[0]}-${var.account}"
+  name       = "public_dataset/"
+  content    = "folder"
+  bucket     = "${var.bucket_names[0]}-${var.account}"
   depends_on = [google_storage_bucket.bucket_datalake]
 }

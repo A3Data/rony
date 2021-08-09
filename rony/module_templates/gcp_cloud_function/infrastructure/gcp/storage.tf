@@ -5,12 +5,12 @@ resource "google_storage_bucket" "bucket_functions" {
 }
 
 resource "null_resource" "write_file_gcs_bgq" {
-  triggers     = {
+  triggers = {
     always_run = uuid()
   }
 
   provisioner "local-exec" {
-    command    = "zip -rj ../../functions/fn_write_file_gcs_bgq_${local.uuid}.zip ../../functions/fn_write_file_gcs_bgq"
+    command = "zip -rj ../../functions/fn_write_file_gcs_bgq_${local.uuid}.zip ../../functions/fn_write_file_gcs_bgq"
   }
 }
 

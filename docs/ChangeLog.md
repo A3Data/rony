@@ -32,3 +32,4 @@
 - New command can be extended via rony plugins
 - Added "add-module" command
   - Possibility to add modules to existing rony project
+

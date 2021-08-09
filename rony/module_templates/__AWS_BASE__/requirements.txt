@@ -1,9 +1,0 @@
-apache-airflow
-boto3
-coverage
-datetime
-docker-compose
-numpy
-pandas
-pytest
-rony

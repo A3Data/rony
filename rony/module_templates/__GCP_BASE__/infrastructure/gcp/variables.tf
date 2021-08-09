@@ -1,11 +1,11 @@
 variable "project_id" {
-  default       = ""
+  default = ""
 }
 
 variable "region_id" {
-  default       = ""
+  default = ""
 }
 
 variable "zone_id" {
-  default       = ""
+  default = ""
 }

@@ -5,12 +5,12 @@ resource "google_storage_bucket" "bucket_functions" {
 }
 
 resource "null_resource" "fn_example_script" {
-  triggers     = {
+  triggers = {
     always_run = timestamp()
   }
 
   provisioner "local-exec" {
-    command    = "zip -urj ../../functions/fn_example_script.zip ../../functions/fn_example_script"
+    command = "zip -urj ../../functions/fn_example_script.zip ../../functions/fn_example_script"
   }
 }
 

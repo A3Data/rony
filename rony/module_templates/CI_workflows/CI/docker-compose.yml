@@ -7,11 +7,8 @@ services:
     entrypoint: 
       - 'sh'
     volumes:
-      - ../infrastructure:/infrastructure
-      - .:/CI
-      - ../app:/app
-
-    working_dir: /
+      - ../:/repo
+    working_dir: /repo
     env_file:
       ../.env
     environment:

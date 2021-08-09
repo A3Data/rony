@@ -1,9 +1,9 @@
 variable "region_id" {
-  default       = "us-east-1"
+  default = "us-east-1"
 }
 
 variable "prefix" {
-  default       = "dev"
+  default = "dev"
 }
 
 variable "account" {
@@ -14,14 +14,14 @@ variable "account" {
 locals {
   prefix = "${var.prefix}-${terraform.workspace}"
   common_tags = {
-    Project        = "Datalake"
-    ManagedBy      = "Terraform"
-    Department     = "systems",
-    Provider       = "A3DATA",
-    Owner          = "Data Engineering"
-    BusinessUnit   = "Data"
-    Billing        = "Infrastructure"
-    Environment    = terraform.workspace
-    UserEmail      = "rony@a3data.com.br"
+    Project      = "Datalake"
+    ManagedBy    = "Terraform"
+    Department   = "systems",
+    Provider     = "A3DATA",
+    Owner        = "Data Engineering"
+    BusinessUnit = "Data"
+    Billing      = "Infrastructure"
+    Environment  = terraform.workspace
+    UserEmail    = "rony@a3data.com.br"
   }
 }

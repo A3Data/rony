@@ -14,7 +14,6 @@ validade_module()
     GREEN='\033[0;32m'
     NC='\033[0m' # No Color
     echo -e "${GREEN}VALIDATING TERRAFORM FOR MODULE: $1 ${NC}"
-    chmod +x ./CI/scripts/validate_terraform.sh
     ./CI/scripts/validate_terraform.sh
     cd ..
 }

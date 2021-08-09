@@ -14,7 +14,6 @@ test_and_lint_module()
     GREEN='\033[0;32m'
     NC='\033[0m' # No Color
     echo -e "${GREEN}TESTING AND LINTING MODULE: $1 ${NC}"
-    chmod +x ./CI/scripts/test_and_lint.sh
     ./CI/scripts/test_and_lint.sh
     cd ..
 }

@@ -83,6 +83,10 @@ def new(ctx, project_name, **kwargs):
 
     # Create git repo
     os.system("git init")
+
+    # Give execution permissions to CI/scripts folder
+    recursive_chmod("./CI/scripts", 0o755)
+
     print(
         "A git repository was created. You should add your files and make your first commit.\n"
     )
@@ -134,6 +138,8 @@ def add_module(module_name, autoconfirm):
     """
     write_module(LOCAL_PATH, module_name, autoconfirm)
 
+    recursive_chmod("./CI/scripts", 0o755)
+
 
 @click.argument("module_name", type=click.STRING, autocompletion=modules_autocomplete)
 @cli.command()
@@ -145,3 +151,10 @@ def diff_2_module(module_name):
         module_name (str): Name of the module to be added
     """
     create_module_from_diff(module_name)
+
+
+def recursive_chmod(path, mode):
+    for dirpath, dirnames, filenames in os.walk(path):
+        os.chmod(dirpath, mode)
+        for filename in filenames:
+            os.chmod(os.path.join(dirpath, filename), mode)

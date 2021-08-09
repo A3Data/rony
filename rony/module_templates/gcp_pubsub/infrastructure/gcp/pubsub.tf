@@ -22,5 +22,5 @@ resource "google_pubsub_subscription" "rony_sub" {
     minimum_backoff = "10s"
   }
 
-  enable_message_ordering    = false
+  enable_message_ordering = false
 }

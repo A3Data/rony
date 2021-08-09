@@ -40,6 +40,7 @@ def info():
 @click.option(
     "--provider", "-p", default="aws", autocompletion=get_autocomplete("new", "provider")
 )
+@click.option("-y", "--autoconfirm", is_flag=True)
 @click.pass_context
 def new(ctx, project_name, **kwargs):
     """Create a new Rony project

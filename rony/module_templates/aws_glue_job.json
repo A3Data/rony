@@ -10,5 +10,8 @@
         "rodrigo.torres@a3data.com.br"
     ],
     "input_info": [],
-    "version": "0.0.0"
+    "version": "0.0.0",
+    "dependencies": [
+        "__AWS_BASE__"
+    ]
 }

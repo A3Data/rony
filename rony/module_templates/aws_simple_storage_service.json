@@ -14,5 +14,8 @@
             "Initial development aws modules"
         ]
     ],
-    "version": "0.0.1"
+    "version": "0.0.1",
+    "dependencies": [
+        "__AWS_BASE__"
+    ]
 }

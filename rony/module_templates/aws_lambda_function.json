@@ -1,0 +1,21 @@
+{
+    "info": "Module for deploying AWS Lambda Functions",
+    "instructions": [
+        ""
+    ],
+    "developers": [
+        "massao.mitsunaga@a3data.com.br",
+        "rodrigo.torres@a3data.com.br"
+    ],
+    "input_info": [
+        [
+            "project_start_date",
+            "21/06/2021",
+            "Initial development aws modules"
+        ]
+    ],
+    "version": "0.0.1",
+    "dependencies": [
+        "__AWS_BASE__"
+    ]
+}

@@ -58,8 +58,8 @@ def get_modules_to_add(command, opts, ctx):
                 all_modules.append("gcp_bigquery")
             if click.confirm("Add CLOUD FUNCTION module?", default=True):
                 all_modules.append("gcp_cloud_function")
-            if click.confirm("Add COMPOSER module?", default=True):
-                all_modules.append("gcp_cloud_composer")
+            if click.confirm("Add PUBSUB module?", default=True):
+                all_modules.append("gcp_pubsub")
 
     for plugin in plugins:
         if hasattr(plugin, "cli_aux") and hasattr(plugin.cli_aux, "get_modules_to_add"):

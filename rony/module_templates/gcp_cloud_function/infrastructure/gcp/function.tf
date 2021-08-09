@@ -13,6 +13,6 @@ resource "google_cloudfunctions_function" "fn_example_script" {
 
   event_trigger {
     event_type  = "google.storage.object.finalize"
-    resource    = var.bucket_datalake
+    resource    = "${var.bucket_names[0]}-${var.account}"
   }
 }

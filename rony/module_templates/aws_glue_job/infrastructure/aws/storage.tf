@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "dl" {
-  bucket = "glue-scripts-${var.account}"
+  bucket = "${locals.prefix}-glue-scripts-${var.account}"
   acl    = "private"
 
   tags = local.common_tags

@@ -16,6 +16,8 @@
   - Glue Job
   - S3
 
+- Added -y/--autoconfirm flag to new command, in order to skip user inputs
+
 - ReadTheDocs
   - Added ReadTheDocs documentation
 

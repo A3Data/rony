@@ -8,6 +8,6 @@ resource "aws_glue_crawler" "glue_crawler" {
     path = var.bucket_paths[count.index]
   }
 
-  tags = local.common_tags,
+  tags = local.common_tags
 
 }

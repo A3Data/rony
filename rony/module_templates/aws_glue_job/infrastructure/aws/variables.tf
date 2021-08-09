@@ -4,7 +4,7 @@ variable "glue_scripts" {
   default     = ["glue_script1", "glue_script2"]
 }
 
-variable "glue_scripts_max_capacity"{
+variable "glue_scripts_max_capacity" {
   description = "Max DPU capacity for each glue script"
   type        = list(number)
   default     = [5, 5]

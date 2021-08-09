@@ -1,10 +1,10 @@
 resource "aws_s3_bucket" "bucket_functions" {
-  bucket       = "${var.bucket_functions}-${var.account}"
-  acl          = "private"
+  bucket = "${var.bucket_functions}-${var.account}"
+  acl    = "private"
 
-tags = local.common_tags
+  tags = local.common_tags
 
-server_side_encryption_configuration {
+  server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
         sse_algorithm = "AES256"
@@ -14,11 +14,11 @@ server_side_encryption_configuration {
 }
 
 resource "null_resource" "fn_example_script" {
-  triggers     = {
+  triggers = {
     always_run = timestamp()
   }
 
   provisioner "local-exec" {
-    command    = "zip -urj ../functions/fn_example_script.zip ../functions/fn_example_script"
+    command = "zip -urj ../functions/fn_example_script.zip ../functions/fn_example_script"
   }
 }

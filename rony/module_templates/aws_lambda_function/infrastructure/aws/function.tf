@@ -1,6 +1,6 @@
 resource "aws_lambda_function" "decompresss3" {
-  filename      = "../functions/fn_example_script.zip"
-  function_name = "decompressS3-${var.account}"
+  filename      = "../../functions/fn_example_script.zip"
+  function_name = "${local.prefix}_decompressS3"
   role          = aws_iam_role.lambda_decompress.arn
   handler       = "handler.handler"
   # The filebase64sha256() function is available in Terraform 0.11.12 and later

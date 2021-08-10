@@ -9,7 +9,7 @@ cd infrastructure/aws/
 (iamlive --output-file './policy.json' > /dev/null &)
 
 terraform init
-terraform workspace select $1
+terraform workspace select $1 || terraform workspace new $1
 terraform destroy $2
 
 pkill iamlive

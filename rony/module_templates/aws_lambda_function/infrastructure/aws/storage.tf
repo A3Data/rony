@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "bucket_functions" {
-  bucket = "${locals.prefix}-${var.bucket_functions}-${var.account}"
+  bucket = "${local.prefix}-${var.bucket_functions}-${var.account}"
   acl    = "private"
 
   tags = local.common_tags

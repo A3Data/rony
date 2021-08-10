@@ -7,7 +7,7 @@ jobs:
   prod_destroy:
     name: Production Destroy
     runs-on: ubuntu-latest
-    container: ratorres7/rony-ci-test:latest
+    container: ratorres7/rony-ci-test:0.0.1-terraform1.0.3
     steps:
       - uses: actions/checkout@v2
       - name: terraform destroy

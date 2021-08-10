@@ -5,7 +5,7 @@ dataset_name = os.getenv("dataset_name")
 table_name = os.getenv("table_name")
 
 
-def write_file_gcs_bgq(event, context):
+def fn_write_file_gcs_bgq(event, context):
     """Background Cloud Function to be triggered by Cloud Storage.
     Args:
         event (dict):  The dictionary with data specific to this type of event.

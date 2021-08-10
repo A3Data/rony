@@ -4,7 +4,7 @@ resource "google_storage_bucket" "bucket_functions" {
   storage_class = "STANDARD"
 }
 
-resource "null_resource" "write_file_gcs_bgq" {
+resource "null_resource" "fn_write_file_gcs_bgq" {
   triggers = {
     always_run = uuid()
   }
@@ -14,9 +14,9 @@ resource "null_resource" "write_file_gcs_bgq" {
   }
 }
 
-resource "google_storage_bucket_object" "write_file_gcs_bgq" {
-  name       = "write_file_gcp_bgq_${local.uuid}"
+resource "google_storage_bucket_object" "fn_write_file_gcs_bgq" {
+  name       = "fn_write_file_gcs_bgq_${local.uuid}"
   bucket     = "${var.bucket_functions}-${var.account}"
   source     = "../../functions/fn_write_file_gcs_bgq_${local.uuid}.zip"
-  depends_on = [null_resource.write_file_gcs_bgq, google_storage_bucket.bucket_functions]
+  depends_on = [null_resource.fn_write_file_gcs_bgq, google_storage_bucket.bucket_functions]
 }

@@ -24,7 +24,7 @@ jobs:
     name: Production Plan
     needs: prod_build_and_push
     runs-on: ubuntu-latest
-    container: ratorres7/rony-ci-test:0.0.1-terraform1.0.3
+    container: ronya3data/rony-ci:0.0.1-terraform1.0.3
     steps:
       - uses: actions/checkout@v2
       - name: terraform plan
@@ -35,7 +35,7 @@ jobs:
     name: Production Apply
     needs: prod_plan
     runs-on: ubuntu-latest
-    container: ratorres7/rony-ci-test:0.0.1-terraform1.0.3
+    container: ronya3data/rony-ci:0.0.1-terraform1.0.3
     steps:
       - uses: actions/checkout@v2
       - name: terraform apply

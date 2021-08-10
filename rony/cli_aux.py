@@ -57,7 +57,7 @@ def get_modules_to_add(command, opts, ctx):
 
         if opts["provider"] == "gcp":
 
-            all_modules.append("__GCP_BASE__")
+            all_modules += ["__GCP_BASE__", "CI_workflows"]
 
             if opts["autoconfirm"]:
                 all_modules += [

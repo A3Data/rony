@@ -4,19 +4,19 @@ resource "google_storage_bucket" "bucket_functions" {
   storage_class = "STANDARD"
 }
 
-resource "null_resource" "fn_example_script" {
+resource "null_resource" "fn_write_file_gcs_bgq" {
   triggers = {
-    always_run = timestamp()
+    always_run = uuid()
   }
 
   provisioner "local-exec" {
-    command = "zip -urj ../../functions/fn_example_script.zip ../../functions/fn_example_script"
+    command = "zip -rj ../../functions/fn_write_file_gcs_bgq_${local.uuid}.zip ../../functions/fn_write_file_gcs_bgq"
   }
 }
 
-resource "google_storage_bucket_object" "fn_example_script" {
-  name       = "fn_example_script"
+resource "google_storage_bucket_object" "fn_write_file_gcs_bgq" {
+  name       = "fn_write_file_gcs_bgq_${local.uuid}"
   bucket     = "${var.bucket_functions}-${var.account}"
-  source     = "../../functions/fn_example_script.zip"
-  depends_on = [null_resource.fn_example_script, google_storage_bucket.bucket_functions]
+  source     = "../../functions/fn_write_file_gcs_bgq_${local.uuid}.zip"
+  depends_on = [null_resource.fn_write_file_gcs_bgq, google_storage_bucket.bucket_functions]
 }

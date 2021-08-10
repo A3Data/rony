@@ -3,7 +3,7 @@ variable "region_id" {
 }
 
 variable "prefix" {
-  default = "dev"
+  default = "prefix"
 }
 
 variable "account" {

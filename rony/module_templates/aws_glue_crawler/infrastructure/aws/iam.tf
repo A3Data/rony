@@ -1,12 +1,12 @@
 resource "aws_iam_role" "glue_role" {
-  name               = "${var.prefix}_Role_GlueCrawler"
+  name               = "${local.prefix}_Role_GlueCrawler"
   path               = "/"
   description        = "Provides write permissions to CloudWatch Logs and S3 Full Access"
   assume_role_policy = file("./permissions/Role_GlueCrawler.json")
 }
 
 resource "aws_iam_policy" "glue_policy" {
-  name        = "${var.prefix}_Policy_GlueCrawler"
+  name        = "${local.prefix}_Policy_GlueCrawler"
   path        = "/"
   description = "Provides write permissions to CloudWatch Logs and S3 Full Access"
   policy      = file("./permissions/Policy_GlueCrawler.json")

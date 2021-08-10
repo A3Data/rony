@@ -39,7 +39,7 @@ def get_modules_to_add(command, opts, ctx):
 
         if opts["provider"] == "aws":
 
-            all_modules += ["__AWS_BASE__", "CI_workflows"]
+            all_modules += ["CI_workflows", "__AWS_BASE__"]
 
             if opts["autoconfirm"]:
                 all_modules += [

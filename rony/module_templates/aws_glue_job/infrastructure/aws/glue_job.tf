@@ -1,6 +1,6 @@
 resource "aws_s3_bucket_object" "glue_script_s3_object" {
   count  = length(var.glue_scripts)
-  bucket = "${var.prefix}-${aws_s3_bucket.dl.id}"
+  bucket = "${local.prefix}-${aws_s3_bucket.dl.id}"
   key    = "/.glue_scripts/${var.glue_scripts[count.index]}.py"
   source = ".glue_scripts/${var.glue_scripts[count.index]}.py"
   etag   = filemd5(".glue_scripts/${var.glue_scripts[count.index]}.py")
@@ -9,7 +9,7 @@ resource "aws_s3_bucket_object" "glue_script_s3_object" {
 
 resource "aws_glue_job" "glue_job" {
   count        = length(var.glue_scripts)
-  name         = var.glue_scripts[count.index]
+  name         = "${local.prefix}-${var.glue_scripts[count.index]}"
   role_arn     = aws_iam_role.glue_job.arn
   max_capacity = var.glue_scripts_max_capacity[count.index]
   glue_version = "2.0"

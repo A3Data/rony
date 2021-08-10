@@ -36,10 +36,12 @@ def get_modules_to_add(command, opts, ctx):
     all_modules = []
 
     if command == "new":
+        if opts["excludeci"] == False:
+            all_modules += ["CI_workflows"] 
 
         if opts["provider"] == "aws":
 
-            all_modules += ["CI_workflows", "__AWS_BASE__"]
+            all_modules += [ "__AWS_BASE__"]
 
             if opts["autoconfirm"]:
                 all_modules += [
@@ -56,8 +58,8 @@ def get_modules_to_add(command, opts, ctx):
                     all_modules.append("aws_lambda_function")
 
         if opts["provider"] == "gcp":
-
-            all_modules += ["__GCP_BASE__", "CI_workflows"]
+            
+            all_modules += ["__GCP_BASE__"]
 
             if opts["autoconfirm"]:
                 all_modules += [

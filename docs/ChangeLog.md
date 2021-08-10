@@ -20,6 +20,7 @@
 - Added CI scripts to run all the testing, linting and validation scripts on every module
   - Added jobs to test package installation on windows
 - Added docker-compose to run rony CI jobs locally
+- Added add-provider function
 - ReadTheDocs
   - Added ReadTheDocs documentation
 - Bugfixes

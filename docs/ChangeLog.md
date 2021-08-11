@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 0.3.1
+
+- Bugfixes
+
 ## Version 0.3.0
 
 - Added CI workflows module for Gitlab and Github

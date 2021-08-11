@@ -2,9 +2,7 @@ name: Production
 
 on:
   push:
-    branches: [prod]
-  pull_request:
-    branches: [prod]
+    branches: [main, master]
 
 jobs:
   prod_build_and_push:
@@ -14,12 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          apk add util-linux pciutils usbutils coreutils binutils findutils grep
+          apk add util-linux pciutils usbutils coreutils binutils findutils grep bash
           apk add python3
           apk add --update py3-pip
           pip3 install awscli
           chmod -R +x ./CI/scripts
-          ./CI/scripts/build_and_push.sh prod
+          bash ./CI/scripts/build_and_push.sh prod
   prod_plan:
     name: Production Plan
     needs: prod_build_and_push
@@ -46,6 +44,3 @@ jobs:
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  TF_VAR_prefix: ${{ secrets.TF_VAR_prefix }}
-  TF_VAR_ecr_image_app_map: ${{ secrets.TF_VAR_ecr_image_app_map }}
-  TF_VAR_app_port: ${{ secrets.TF_VAR_app_port }}

@@ -1,0 +1,31 @@
+# Simple CI for bitbucket
+# Assumes that tests run o dev branch and deploy runs on master
+# Runs tests on dev PR
+
+image: hashicorp/terraform
+
+pipelines:
+  pull-requests:
+    dev:
+      - step:
+          name: Test Infra
+          script:
+            - apk add zip
+            - sh scripts/build_lambda_package.sh
+            - cd infrastructure
+            - terraform init
+            - terraform validate
+            - terraform plan
+
+  branches:
+    master:
+      - step:
+          name: Deploy Infra to Production
+          deployment: Production
+          script:
+            - apk add zip
+            - sh scripts/build_lambda_package.sh
+            - cd infrastructure
+            - terraform init
+            - terraform validate
+            - terraform apply -auto-approve

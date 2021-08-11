@@ -1,5 +1,5 @@
 image:
-  name: ratorres7/rony-ci-test:latest
+  name: ronya3data/rony-ci:0.0.1-terraform1.0.3
   entrypoint:
     - ""
 

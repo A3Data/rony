@@ -7,7 +7,7 @@ jobs:
   staging_destroy:
     name: Staging Destroy
     runs-on: ubuntu-latest
-    container: ratorres7/rony-ci-test:latest
+    container: ronya3data/rony-ci:0.0.1-terraform1.0.3
     steps:
       - uses: actions/checkout@v2
       - name: terraform destroy

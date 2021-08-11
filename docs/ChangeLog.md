@@ -7,10 +7,9 @@
   - Modules:
     - \_\_GCP_BASE__
     - Bigquery
-    - Cloud Composer
     - Cloud Functions
     - Cloud Storage
-    - Dataflow
+    - PubSub
 - Added new modules to AWS provider
   - Glue Crawler
   - Glue Job

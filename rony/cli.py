@@ -41,7 +41,7 @@ def info():
     "--provider", "-p", default="aws", autocompletion=get_autocomplete("new", "provider")
 )
 @click.option("-y", "--autoconfirm", is_flag=True)
-@click.option("-e", "--excludeci",  is_flag=True)
+@click.option("-e", "--excludeci", is_flag=True)
 @click.pass_context
 def new(ctx, project_name, **kwargs):
     """Create a new Rony project
@@ -69,7 +69,7 @@ def new(ctx, project_name, **kwargs):
     }
 
     # Running modules
-    for module_name in set(module_names):
+    for module_name in sorted(set(module_names), key=module_names.index):
         write_module(
             os.path.join(LOCAL_PATH, project_name),
             module_name,
@@ -161,7 +161,9 @@ def recursive_chmod(path, mode):
             os.chmod(os.path.join(dirpath, filename), mode)
 
 
-@click.argument("provider_name", type=click.STRING, autocompletion=get_autocomplete("new", "provider"))
+@click.argument(
+    "provider_name", type=click.STRING, autocompletion=get_autocomplete("new", "provider")
+)
 @click.option("-y", "--autoconfirm", is_flag=True)
 @cli.command()
 @click.pass_context
@@ -173,9 +175,9 @@ def add_provider(ctx, provider_name, **kwargs):
         provider_name (str): Name of the provider to be added
     """
 
-    kwargs['provider'] = provider_name
-    kwargs['excludeci'] = True
-    module_names = get_modules_to_add("new", kwargs,ctx )
+    kwargs["provider"] = provider_name
+    kwargs["excludeci"] = True
+    module_names = get_modules_to_add("new", kwargs, ctx)
 
     # Inputs to be passed to all modules
     custom_inputs = {
@@ -183,7 +185,7 @@ def add_provider(ctx, provider_name, **kwargs):
         "provider_start_date": datetime.today().strftime("%B %d, %Y"),
     }
 
-    for module_name in set(module_names):
+    for module_name in sorted(set(module_names), key=module_names.index):
         write_module(
             os.path.join(LOCAL_PATH),
             module_name,

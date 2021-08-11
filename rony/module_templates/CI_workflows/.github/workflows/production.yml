@@ -14,12 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          apk add util-linux pciutils usbutils coreutils binutils findutils grep
+          apk add util-linux pciutils usbutils coreutils binutils findutils grep bash
           apk add python3
           apk add --update py3-pip
           pip3 install awscli
           chmod -R +x ./CI/scripts
-          ./CI/scripts/build_and_push.sh prod
+          bash ./CI/scripts/build_and_push.sh prod
   prod_plan:
     name: Production Plan
     needs: prod_build_and_push

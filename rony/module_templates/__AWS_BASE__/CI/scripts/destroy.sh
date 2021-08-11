@@ -18,7 +18,7 @@ sleep 1
 echo ""
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
-echo "${GREEN}PERMISSIONS USED:${NC}"
+echo -e "${GREEN}PERMISSIONS USED:${NC}"
 cat ./policy.json
 
 cd ../../

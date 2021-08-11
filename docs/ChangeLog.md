@@ -1,16 +1,15 @@
 # Change Log
 
-## Version 0.2.1 (dev)
+## Version 0.3.0
 
 - Added CI workflows module for Gitlab and Github
 - Added support for new provider - GCP
   - Modules:
     - \_\_GCP_BASE__
     - Bigquery
-    - Cloud Composer
     - Cloud Functions
     - Cloud Storage
-    - Dataflow
+    - PubSub
 - Added new modules to AWS provider
   - Glue Crawler
   - Glue Job

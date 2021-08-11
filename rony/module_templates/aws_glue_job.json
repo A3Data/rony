@@ -1,0 +1,17 @@
+{
+    "info": "Module for deploying glue jobs",
+    "instructions": [
+        "After installing modules:",
+        " - create your Glue scripts inside folder etl/glu_scripts",
+        " - edit terraform 'glue_scripts' and 'glue_scripts_max_capacity' variables",
+        " - make sure to run the script 'scripts/pre_terraform.sh' before each terraform run (add to your CI pipeline)"
+    ],
+    "developers": [
+        "rodrigo.torres@a3data.com.br"
+    ],
+    "input_info": [],
+    "version": "0.0.0",
+    "dependencies": [
+        "__AWS_BASE__"
+    ]
+}

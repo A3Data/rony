@@ -1,0 +1,14 @@
+{
+    "info": "Module for deploying cloud function",
+    "instructions": [
+        ""
+    ],
+    "developers": [
+        "westerley.reis@a3data.com.br"
+    ],
+    "input_info": [],
+    "version": "0.0.1",
+    "dependencies": [
+        "__AWS_BASE__"
+    ]
+}

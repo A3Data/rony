@@ -1,0 +1,14 @@
+{
+    "info": "Module for deploying cloud storage",
+    "instructions": [
+        ""
+    ],
+    "developers": [
+        "westerley.reis@a3data.com.br"
+    ],
+    "input_info": [],
+    "version": "0.0.1",
+    "dependencies": [
+        "__GCP_BASE__"
+    ]
+}

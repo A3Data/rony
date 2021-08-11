@@ -25,7 +25,7 @@ That way, the Rony cli command will point directly to the source code. Any chang
 
 ## Adding new modules
 
-All Rony module templates are kept in ["rony/module_templates/"](rony/module_templates) folder.
+All Rony module templates are kept in ["rony/module_templates/"](rony/module_templates/) folder.
 To add a new module, you just need to add a folder named after the module and add all the files and folders from the module to it.
 
 The files and folders need to respect the exact same folder structure they will have on the user's project.

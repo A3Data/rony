@@ -1,2 +1,2 @@
 include README.md
-recursive-include rony/module_templates/ *
+recursive-include rony/module_templates *

@@ -5,7 +5,7 @@ services:
   rony-ci: 
     image: ronya3data/rony-ci:0.0.1-terraform0.15.5
     entrypoint: 
-      - 'sh'
+      - 'bash'
     volumes:
       - ../:/repo
     working_dir: /repo

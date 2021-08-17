@@ -87,7 +87,7 @@ Production Plan:
   stage: Production Plan
   script:
     - chmod -R +x ./CI/scripts
-    - ./CI/scripts/plan.sh staging prod
+    - ./CI/scripts/plan.sh prod
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
 

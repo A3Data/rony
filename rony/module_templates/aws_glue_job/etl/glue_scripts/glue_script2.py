@@ -1,1 +1,0 @@
-print('This is you glue script 2')

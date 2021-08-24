@@ -1,5 +1,5 @@
 data "template_file" "policy_glue_job" {
-  template = file("./permissions/Policy_Glue_Job.tpl.json")
+  template = file("./permissions/Policy_Glue_Job.tplt.json")
   vars = {
     bucket_name = aws_s3_bucket.bucket_glue_job.id
   }
@@ -22,7 +22,7 @@ resource "aws_iam_policy" "glue_policy" {
   path        = "/"
   description = "Policy for AWS Glue service role which allows access to related services including EC2, S3, and Cloudwatch Logs"
 
-  policy = file("./permissions/Policy_Glue_Job.tpl.json")
+  policy = file("./permissions/Policy_Glue_Job.tplt.json")
 
 }
 

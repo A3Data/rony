@@ -1,0 +1,12 @@
+{
+    "info": "Module for developing Spark classes",
+    "instructions": [
+        ""
+    ],
+    "developers": [
+        "pedro.toledo@a3data.com.br"
+    ],
+    "input_info": [],
+    "version": "0.0.1",
+    "dependencies": []
+}

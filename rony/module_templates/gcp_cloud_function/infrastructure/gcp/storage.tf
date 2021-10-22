@@ -2,6 +2,7 @@ resource "google_storage_bucket" "bucket_functions" {
   name          = "${var.bucket_functions}-${var.account}"
   location      = var.region_id
   storage_class = "STANDARD"
+  force_destroy = true
 }
 
 resource "null_resource" "fn_write_file_gcs_bgq" {

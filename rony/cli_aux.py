@@ -67,6 +67,7 @@ def get_modules_to_add(command, opts, ctx):
                     "gcp_bigquery",
                     "gcp_cloud_function",
                     "gcp_pubsub",
+                    "gcp_dataflow",
                 ]
             else:
                 if click.confirm("Add CLOUD_STORAGE module?", default=True):
@@ -77,6 +78,8 @@ def get_modules_to_add(command, opts, ctx):
                     all_modules.append("gcp_cloud_function")
                 if click.confirm("Add PUBSUB module?", default=True):
                     all_modules.append("gcp_pubsub")
+                if click.confirm("Add DATAFLOW module?", default=True):
+                    all_modules.append("gcp_dataflow")
 
     for plugin in plugins:
         if hasattr(plugin, "cli_aux") and hasattr(plugin.cli_aux, "get_modules_to_add"):

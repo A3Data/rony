@@ -3,8 +3,7 @@ import json
 from google.cloud import pubsub_v1
 from fake_web_events import Simulation
 
-path = os.path.dirname(os.path.dirname(__file__))
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = f"{path}/config/service-account.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = f"service-account.json"
 
 topic = ""
 publisher = pubsub_v1.PublisherClient()

@@ -1,0 +1,21 @@
+{
+    "info": "Module for deploying AWS Kinesis Stream",
+    "instructions": [
+        ""
+    ],
+    "developers": [
+        "massao.mitsunaga@a3data.com.br",
+        "hery.barbosa@a3data.com.br"
+    ],
+    "input_info": [
+        [
+            "project_start_date",
+            "23/08/2021",
+            "Initial development aws modules"
+        ]
+    ],
+    "version": "0.0.1",
+    "dependencies": [
+        "__AWS_BASE__"
+    ]
+}

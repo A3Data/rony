@@ -33,49 +33,30 @@ source <project_name>_env/bin/activate
 pip install -r requirements.txt
 ```
 
-4) Rony has also some handy cli commands to build and run docker images locally. You can do
-
-```bash
-cd etl
-rony build <image_name>:<tag>
-```
-
-to build an image and run it with
-
-```bash
-rony run <image_name>:<tag>
-```
-
-In this particular implementation, `run.py` has a simple etl code that accepts a parameter to filter the data based on the `Sex` column. To use that, you can do
-
-```bash
-docker run <image_name>:<tag> -s female
-```
-
 ## Implementation suggestions
 
-When you start a new `rony` project, you will find
+When you start a new `rony` project, you will by default create a project with `aws` as `provider` and you will be asked which modules you want to implement in yout project.
 
-- an `infrastructure` folder with terraform code creating on AWS:
-  - an S3 bucket
-  - a Lambda function
-  - a CloudWatch log group
-  - a ECR repository
-  - a AWS Glue Crawler
-  - IAM roles and policies for lambda and glue
+You can implement modules after the project creation using the following command in your project's root folder. 
 
-- an `etl` folder with:
-  - a `Dockerfile` and a `run.py` example of ETL code
-  - a `lambda_function.py` with a "Hello World" example
+```bash
+rony add-module <module_name>
+```
 
-- a `tests` folder with unit testing on the Lambda function
-- a `.github/workflow` folder with a Github Actions CI/CD pipeline suggestion. This pipeline
-  - Tests lambda function
-  - Builds and runs the docker image
-  - Sets AWS credentials
-  - Make a terraform plan (but not actually deploy anything)
+The module_name can be found on the module_templates folder in the rony project folder.
 
-- a `dags` folder with some **Airflow** example code.f
+When you start a new `rony` project, you will find:
+
+- an `infrastructure` folder with terraform code creating on the chosen provider:
+  - a backend file
+    - For the aws provider, you will need to create a bucket manually and reference its name on the bucket variable.
+  - a provider file
+  - a variables file
+  - files for the modules implemented during the project creation
+
+- a `CI` folder with a docker-composer file and CI scripts and tests
+  
+- a `Makefile` file containing shortcut commands for the project
 
 You also have a `scripts` folder with a bash file that builds a lambda deploy package.
 

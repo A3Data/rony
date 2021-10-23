@@ -1,5 +1,5 @@
-resource "aws_s3_bucket" "dl" {
-  bucket = "${local.prefix}-glue-scripts-${var.account}"
+resource "aws_s3_bucket" "bucket_glue_job" {
+  bucket = "${var.prefix}-${var.bucket_glue_job}-${var.account}"
   acl    = "private"
 
   tags = local.common_tags
@@ -12,4 +12,3 @@ resource "aws_s3_bucket" "dl" {
     }
   }
 }
-

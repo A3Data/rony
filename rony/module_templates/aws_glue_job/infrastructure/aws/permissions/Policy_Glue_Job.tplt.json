@@ -6,21 +6,12 @@
             "Action": [
                 "glue:*",
                 "s3:GetBucketLocation",
-                "s3:ListBucket",
+                "s3:ListBucket",    
                 "s3:ListAllMyBuckets",
                 "s3:GetBucketAcl",
-                "ec2:DescribeVpcEndpoints",
-                "ec2:DescribeRouteTables",
-                "ec2:CreateNetworkInterface",
-                "ec2:DeleteNetworkInterface",
-                "ec2:DescribeNetworkInterfaces",
-                "ec2:DescribeSecurityGroups",
-                "ec2:DescribeSubnets",
-                "ec2:DescribeVpcAttribute",
                 "iam:ListRolePolicies",
                 "iam:GetRole",
-                "iam:GetRolePolicy",
-                "cloudwatch:PutMetricData"
+                "iam:GetRolePolicy"
             ],
             "Resource": [
                 "*"
@@ -43,7 +34,7 @@
                 "s3:DeleteObject"
             ],
             "Resource": [
-                "arn:aws:s3:::${var.base_bucket_name}-*/*"
+                "arn:aws:s3:::${bucket_name}-*/*"
             ]
         },
         {
@@ -65,25 +56,6 @@
             ],
             "Resource": [
                 "arn:aws:logs:*:*:/aws-glue/*"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ec2:CreateTags",
-                "ec2:DeleteTags"
-            ],
-            "Condition": {
-                "ForAllValues:StringEquals": {
-                    "aws:TagKeys": [
-                        "aws-glue-service-resource"
-                    ]
-                }
-            },
-            "Resource": [
-                "arn:aws:ec2:*:*:network-interface/*",
-                "arn:aws:ec2:*:*:security-group/*",
-                "arn:aws:ec2:*:*:instance/*"
             ]
         }
     ]

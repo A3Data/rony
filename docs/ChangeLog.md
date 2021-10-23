@@ -7,6 +7,8 @@
   - Fixes on diif-2-module function
     - Added dependencies field to json file created
     - Fixed issue that would not add new files to created module
+- Added spark scripts module
+
 
 ## Version 0.3.1
 

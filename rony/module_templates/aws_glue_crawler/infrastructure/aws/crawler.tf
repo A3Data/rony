@@ -5,7 +5,7 @@ resource "aws_glue_crawler" "glue_crawler" {
   role          = aws_iam_role.glue_role.arn
 
   s3_target {
-    path = var.bucket_paths[count.index]
+    path = "${local.prefix}-${var.bucket_paths[count.index]}-${var.account}"
   }
 
   tags = local.common_tags

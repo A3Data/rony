@@ -1,5 +1,15 @@
 # Change Log
 
+## Version 0.3.2 (dev)
+
+- Bugfixes:
+  - Gitlab CI fix on production plan step
+  - Fixes on diif-2-module function
+    - Added dependencies field to json file created
+    - Fixed issue that would not add new files to created module
+- Added spark scripts module
+
+
 ## Version 0.3.1
 
 - Bugfixes

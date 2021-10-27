@@ -3,6 +3,7 @@ resource "google_storage_bucket" "bucket_datalake" {
   name          = "${var.bucket_names[count.index]}-${var.account}"
   location      = var.region_id
   storage_class = "STANDARD"
+  force_destroy = true
 }
 
 # folder inside landing-zone

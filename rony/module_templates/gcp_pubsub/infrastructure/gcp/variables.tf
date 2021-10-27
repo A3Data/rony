@@ -1,4 +1,4 @@
-variable "pubsub_topic" {
+variable "pubsub_topic_name" {
   default = ""
 }
 

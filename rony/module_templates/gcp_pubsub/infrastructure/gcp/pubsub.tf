@@ -1,5 +1,5 @@
 resource "google_pubsub_topic" "rony_topic" {
-  name = var.pubsub_topic
+  name = var.pubsub_topic_name
 }
 
 resource "google_pubsub_subscription" "rony_sub" {

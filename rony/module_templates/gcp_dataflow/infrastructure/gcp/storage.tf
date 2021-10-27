@@ -26,5 +26,5 @@ resource "null_resource" "dataflow_job" {
     ])
   }
 
-  depends_on = [google_storage_bucket.bucket_dataflow]
+  depends_on = [google_storage_bucket.bucket_dataflow, google_pubsub_topic.rony_topic]
 }

@@ -9,6 +9,8 @@
     "input_info": [],
     "version": "0.0.1",
     "dependencies": [
-        "__GCP_BASE__"
+        "__GCP_BASE__",
+        "gcp_pubsub",
+        "gcp_cloud_storage"
     ]
 }

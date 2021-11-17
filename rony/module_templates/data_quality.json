@@ -1,0 +1,15 @@
+{
+    "info": "Module with Classes for Data Quality jobs using Spark and AWS PyDeequ",
+    "instructions": [
+        "This module has a dependency with pydeequ library. It should be installed on running clusters or servers.",
+        
+    ],
+    "developers": [
+        "neylson.crepalde@a3data.com.br"
+    ],
+    "input_info": [],
+    "version": "0.0.1",
+    "dependencies": [
+        "CI_workflows"
+    ]
+}

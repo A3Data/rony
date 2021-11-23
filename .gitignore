@@ -133,3 +133,6 @@ dmypy.json
 *_env/
 
 ci-test/
+
+.DS_Store
+

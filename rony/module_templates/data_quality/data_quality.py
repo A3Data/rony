@@ -13,6 +13,14 @@ class DataQuality(ABC):
 
 
     @abstractmethod
+    def run(self) -> None:
+        """
+        Run the DataQuality process
+        """
+        pass
+
+
+    @abstractmethod
     def write_output(self, dataframe: bool = True) -> None:
         """
         Write output for DataQuality process.

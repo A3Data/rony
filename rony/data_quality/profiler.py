@@ -34,31 +34,3 @@ class Profiler(DataQuality):
         """
         pass
 
-
-    def write_output(self, df: DataFrame, path: str,
-                     delta: bool = True) -> None:
-        """
-        Write output for DataQuality process.
-
-        Parameters
-        ----------
-        df: DataFrame
-            The DataFrame object to write to an external object storage
-        path: str
-            The path to write the results. Usually, an S3/GCS/Blob Storage
-            path
-        delta: bool
-            If True, write a delta table on specified path. If False, write a
-            simple parquet file.
-        """
-        if delta:
-            output_format = "delta"
-        else:
-            output_format = "parquet"
-
-        (
-            df.write
-            .format(output_format)
-            .save(path)
-        )
-

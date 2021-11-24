@@ -1,6 +1,6 @@
 from pyspark.sql.dataframe import DataFrame
 from .data_quality import DataQuality
-from pyspark.sql import DataFrame
+from pyspark.sql import SparkSession, DataFrame
 
 
 class Profiler(DataQuality):
@@ -11,8 +11,11 @@ class Profiler(DataQuality):
     ----------
     spark: SparkSession
         A SparkSession object to run DataQuality jobs.
-
     """
+
+    def __init__(self, spark: SparkSession) -> None:
+        super().__init__(spark)
+
 
     def run(self, df: DataFrame) -> DataFrame:
         """

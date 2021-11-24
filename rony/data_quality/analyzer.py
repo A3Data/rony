@@ -1,9 +1,13 @@
 from pyspark.sql.dataframe import DataFrame
 from .data_quality import DataQuality
 from pyspark.sql import DataFrame
+from pydeequ.analyzers import (
+    AnalysisRunner, AnalyzerContext, Size, Completeness, Mean,
+    Correlation, ApproxCountDistinct
+)
 
 
-class Profiler(DataQuality):
+class Analyzer(DataQuality):
     """
     Abstract DataQuality Class
 
@@ -29,7 +33,22 @@ class Profiler(DataQuality):
 
         DataFrame -> A DataFrame with the results for DataQuality job.
         """
-        pass
+        analysisResult = (
+            AnalysisRunner(self.spark)
+                .onData(df)
+                .addAnalyzer(Size())
+                .addAnalyzer(Completeness("PassengerId"))
+                .addAnalyzer(ApproxCountDistinct("Pclass"))
+                .addAnalyzer(Mean("Age"))
+                .addAnalyzer(Correlation("Age", "Fare"))
+                .run()
+        )
+
+        analysisResult_df = (
+            AnalyzerContext
+                .successMetricsAsDataFrame(self.spark, analysisResult)
+        )
+        return analysisResult_df
 
 
     def write_output(self, df: DataFrame, path: str,

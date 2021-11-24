@@ -53,14 +53,4 @@ class DataQuality(ABC):
             If True, write a delta table on specified path. If False, write a
             simple parquet file.
         """
-        if delta:
-            output_format = "delta"
-        else:
-            output_format = "parquet"
-
-        (
-            df.write
-            .format(output_format)
-            .save(path)
-        )
-
+        pass

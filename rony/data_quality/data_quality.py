@@ -111,8 +111,8 @@ class DataQuality(DQ):
         )
 
 
-    def write_output(self, df: DataFrame, path: str, mode: str,
-                     delta: bool = True) -> None:
+    def write_output(self, df: DataFrame, path: str,
+                     mode: str = "overwrite", delta: bool = True) -> None:
         """
         Write output for DataQuality process.
 
@@ -123,9 +123,12 @@ class DataQuality(DQ):
         path: str
             The path to write the results. Usually, an S3/GCS/Blob Storage
             path
+        mode: str
+            Write mode for parquet or delta table. One of "overwrite",
+            "append", "error" or "ignore". Defaults to "overwrite".
         delta: bool
             If True, write a delta table on specified path. If False, write a
-            simple parquet file.
+            simple parquet file. Defaults to True.
         """
         if delta:
             output_format = "delta"

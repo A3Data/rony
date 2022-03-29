@@ -43,6 +43,7 @@ You are free to change this decisions as you wish (that's the whole point of the
 ### Dependencies
 
 - Python (>=3.6)
+- pip (>=22.0.4) 
 
 ### Install
 
@@ -50,18 +51,18 @@ You are free to change this decisions as you wish (that's the whole point of the
 pip install -U rony
 ```
 
-### Enabling autocompletition (linux users):
+### Enabling autocompletion (unix users):
 
 For bash:
 
 ```bash
-echo 'eval "$(_RONY_COMPLETE=source_bash rony)"' >> ~/.bashrc
+echo 'eval "$(_RONY_COMPLETE=bash_source rony)"' >> ~/.bashrc
 ```
 
 For Zsh:
 
 ```bash
-echo 'eval "$(_RONY_COMPLETE=source_zsh rony)"' >> ~/.zshrc
+echo 'eval "$(_RONY_COMPLETE=zsh_source rony)"' >> ~/.zshrc
 ```
 
 # How do I use Rony?
@@ -149,6 +150,8 @@ You also have a `scripts` folder with a bash file that builds a lambda deploy pa
 
 
 ## Contributing
+
+Have a look at our [contributing guide](CONTRIBUTING.md).
 
 Make a pull request with your implementation.
 

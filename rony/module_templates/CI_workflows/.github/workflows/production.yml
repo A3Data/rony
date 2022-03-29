@@ -1,0 +1,46 @@
+name: Production
+
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+  prod_build_and_push:
+    name: Production Build and Push
+    runs-on: ubuntu-latest
+    container: docker:20-dind
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          apk add util-linux pciutils usbutils coreutils binutils findutils grep bash
+          apk add python3
+          apk add --update py3-pip
+          pip3 install awscli
+          chmod -R +x ./CI/scripts
+          bash ./CI/scripts/build_and_push.sh prod
+  prod_plan:
+    name: Production Plan
+    needs: prod_build_and_push
+    runs-on: ubuntu-latest
+    container: ronya3data/rony-ci:0.0.1-terraform1.0.3
+    steps:
+      - uses: actions/checkout@v2
+      - name: terraform plan
+        run: |
+          chmod -R +x ./CI/scripts
+          ./CI/scripts/plan.sh prod
+  prod_apply:
+    name: Production Apply
+    needs: prod_plan
+    runs-on: ubuntu-latest
+    container: ronya3data/rony-ci:0.0.1-terraform1.0.3
+    steps:
+      - uses: actions/checkout@v2
+      - name: terraform apply
+        run: |
+          chmod -R +x ./CI/scripts
+          ./CI/scripts/apply.sh prod -auto-approve
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

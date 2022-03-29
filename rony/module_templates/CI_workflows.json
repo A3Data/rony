@@ -1,0 +1,12 @@
+{
+    "info": "Module for setting CI workflows on github and gitlab",
+    "instructions": [
+        "After installing module configure credentials and any necessary environmental variables on Github/Gitlab"
+    ],
+    "developers": [
+        "rodrigo.torres@a3data.com.br"
+    ],
+    "input_info": [],
+    "version": "0.0.0",
+    "dependencies": []
+}

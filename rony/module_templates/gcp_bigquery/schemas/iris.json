@@ -1,0 +1,27 @@
+[
+  {
+    "mode": "REQUIRED",
+    "name": "sepal_length",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "sepal_width",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "petal_length",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "petal_width",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "REQUIRED",
+    "name": "class",
+    "type": "STRING"
+  }
+]

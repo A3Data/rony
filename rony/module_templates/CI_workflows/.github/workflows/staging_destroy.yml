@@ -1,0 +1,20 @@
+name: Staging Destroy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  staging_destroy:
+    name: Staging Destroy
+    runs-on: ubuntu-latest
+    container: ronya3data/rony-ci:0.0.1-terraform1.0.3
+    steps:
+      - uses: actions/checkout@v2
+      - name: terraform destroy
+        run: |
+          chmod -R +x ./CI/scripts
+          ./CI/scripts/destroy.sh staging -auto-approve
+
+env:
+  AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+  AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}

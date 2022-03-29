@@ -29,7 +29,10 @@ setup(
       keywords='data engineering mlops devops pipelines',
       license='Apache License 2.0',
     install_requires=[
-        'Click'
+        'Click',
+        'Jinja2',
+        'packaging',
+        'unidiff',
     ],
     entry_points='''
         [console_scripts]

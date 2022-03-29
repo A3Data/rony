@@ -1,0 +1,110 @@
+image:
+  name: ronya3data/rony-ci:0.0.1-terraform1.0.3
+  entrypoint:
+    - ""
+
+stages:
+  - Test and Lint
+  - Staging Build and Push
+  - Staging Plan
+  - Staging Apply
+  - Staging Destroy
+  - Production Build and Push
+  - Production Plan
+  - Production Apply
+  - Production Destroy
+
+Validate Terraform:
+  stage: Test and Lint
+  script:
+    - chmod -R +x ./CI/scripts
+    - ./CI/scripts/validate_terraform.sh
+  rules:
+    - if: "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(staging|master|main)$/ || $CI_COMMIT_BRANCH =~ /^(staging|master|main)$/"
+
+Test and Lint:
+  stage: Test and Lint
+  script:
+    - chmod -R +x ./CI/scripts
+    - ./CI/scripts/test_and_lint.sh
+  rules:
+    - if: "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(staging|master|main)$/ || $CI_COMMIT_BRANCH =~ /^(staging|master|main)$/"
+
+Staging Build and Push:
+  image: docker:19.03.5
+  services:
+    - docker:19.03.5-dind
+  stage: Staging Build and Push
+  script:
+    - apk add util-linux pciutils usbutils coreutils binutils findutils grep bash
+    - apk add python3
+    - pip3 install awscli
+    - chmod -R +x ./CI/scripts
+    - bash ./CI/scripts/build_and_push.sh staging
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "staging"'
+
+Staging Plan:
+  stage: Staging Plan
+  script:
+    - chmod -R +x ./CI/scripts
+    - ./CI/scripts/plan.sh staging
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "staging"'
+
+Staging Apply:
+  stage: Staging Apply
+  script:
+    - chmod -R +x ./CI/scripts
+    - ./CI/scripts/apply.sh staging -auto-approve
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "staging"'
+
+Staging Destroy:
+  stage: Staging Destroy
+  script:
+    - chmod -R +x ./CI/scripts
+    - ./CI/scripts/destroy.sh staging -auto-approve
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "staging"'
+      when: manual
+
+Production Build and Push:
+  image: docker:19.03.5
+  services:
+    - docker:19.03.5-dind
+  stage: Production Build and Push
+  script:
+    - apk add util-linux pciutils usbutils coreutils binutils findutils grep bash
+    - apk add python3
+    - pip3 install awscli
+    - chmod -R +x ./CI/scripts
+    - bash ./CI/scripts/build_and_push.sh prod
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+
+Production Plan:
+  stage: Production Plan
+  script:
+    - chmod -R +x ./CI/scripts
+    - ./CI/scripts/plan.sh prod
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+
+Production Apply:
+  stage: Production Apply
+  script:
+    - chmod -R +x ./CI/scripts
+    - ./CI/scripts/apply.sh prod -auto-approve
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      when: manual
+
+Production Destroy:
+  stage: Production Destroy
+  script:
+    - chmod -R +x ./CI/scripts
+    - ./CI/scripts/destroy.sh prod -auto-approve
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      when: manual

@@ -1,0 +1,14 @@
+{
+    "info": "Module for deploying gcp base files",
+    "instructions": [
+        "In the provider.tf file you must specify the path to the credential.json"
+    ],
+    "developers": [
+        "westerley.reis@a3data.com.br"
+    ],
+    "input_info": [],
+    "version": "0.0.1",
+    "dependencies": [
+        "CI_workflows"
+    ]
+}

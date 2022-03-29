@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+
+  rony-ci: 
+    image: ronya3data/rony-ci:0.0.1-terraform1.0.3
+    entrypoint: 
+      - 'bash'
+    volumes:
+      - ../:/repo_dir
+    working_dir: /repo_dir

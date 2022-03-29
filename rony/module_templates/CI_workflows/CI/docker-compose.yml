@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+
+  rony-ci: 
+    image: ronya3data/rony-ci:0.0.1-terraform0.15.5
+    entrypoint: 
+      - 'bash'
+    volumes:
+      - ../:/repo
+    working_dir: /repo
+    env_file:
+      ../.env
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}

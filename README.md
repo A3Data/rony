@@ -43,6 +43,7 @@ You are free to change this decisions as you wish (that's the whole point of the
 ### Dependencies
 
 - Python (>=3.6)
+- pip (>=22.0.4) 
 
 ### Install
 

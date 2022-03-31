@@ -1,4 +1,4 @@
-import json
+import yaml
 from pyspark.sql.dataframe import DataFrame
 from .data_quality import DataQuality
 from pyspark.sql import SparkSession, DataFrame
@@ -48,7 +48,7 @@ class Analyzer(DataQuality):
         str -> The AnalysisRunner expression as a str object
         """
         with open(config_path, "r") as file:
-            configurations = json.load(file)
+            configurations = yaml.full_load(file)
 
         expression = "AnalysisRunner(spark).onData(df).addAnalyzer(Size())"
 

@@ -50,11 +50,21 @@ class Analyzer(DataQuality):
         with open(config_path, "r") as file:
             configurations = yaml.full_load(file)
 
+        columnsconfig = configurations["columns"]
+        metricsconfig = configurations["metrics"]
+
         expression = "AnalysisRunner(spark).onData(df).addAnalyzer(Size())"
 
-        for col in configurations.keys():
-            for method in configurations[col]:
+        for col in columnsconfig.keys():
+            for method in columnsconfig[col]:
                 expression += ".addAnalyzer(" + method + '("' + col + '"))'
+
+        for method in metricsconfig.keys():
+            expression += ".addAnalyzer(" + method + '('
+            for col in metricsconfig[method]:
+                expression += '"' + col + '", '
+            expression += '))'
+
         expression += ".run()"
         return expression
 

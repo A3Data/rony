@@ -11,7 +11,7 @@ class DQ(ABC):
     spark: SparkSession
         A SparkSession object to run DataQuality jobs.
         SparkSession must have two configurations:
-        .config("spark.jars.packages", "com.amazon.deequ:deequ:2.0.0-spark-3.1")
+        .config("spark.jars.packages", "com.amazon.deequ:deequ:2.0.1-spark-3.2")
         .config("spark.jars.excludes", "net.sourceforge.f2j:arpack_combined_all")
     """
 
@@ -71,7 +71,7 @@ class DataQuality(DQ):
     spark: SparkSession
         A SparkSession object to run DataQuality jobs.
         SparkSession must have two configurations:
-        .config("spark.jars.packages", "com.amazon.deequ:deequ:2.0.0-spark-3.1")
+        .config("spark.jars.packages", "com.amazon.deequ:deequ:2.0.1-spark-3.2")
         .config("spark.jars.excludes", "net.sourceforge.f2j:arpack_combined_all")
     """
 
@@ -80,14 +80,20 @@ class DataQuality(DQ):
 
 
     @classmethod
-    def create_pydeequ_SparkSession(cls) -> SparkSession:
+    def create_pydeequ_SparkSession(cls, deequ_maven_package="com.amazon.deequ:deequ:2.0.1-spark-3.2") -> SparkSession:
         """
-        Creates a default SparkSession with PyDeequ jars.
+        Creates a default SparkSession with PyDeequ jars. 
+        
+        Parameters
+        ----------
+
+        deequ_maven_package: str
+            Maven package to use in Spark application. Defaults to "com.amazon.deequ:deequ:2.0.1-spark-3.2".
         """
         return (
             SparkSession
             .builder
-            .config("spark.jars.packages", "com.amazon.deequ:deequ:2.0.0-spark-3.1")
+            .config("spark.jars.packages", deequ_maven_package)
             .config("spark.jars.excludes", "net.sourceforge.f2j:arpack_combined_all")
             .getOrCreate()
         )
@@ -95,15 +101,27 @@ class DataQuality(DQ):
 
 
     @classmethod
-    def create_complete_SparkSession(cls) -> SparkSession:
+    def create_deequ_delta_SparkSession(cls, 
+        deequ_maven_package="com.amazon.deequ:deequ:2.0.1-spark-3.2",
+        delta_maven_package="io.delta:delta-core_2.12:1.2.1") -> SparkSession:
         """
         Creates a SparkSession with PyDeequ and Delta jars
         and necessary configurations.
+
+
+        Parameters
+        ----------
+
+        deequ_maven_package: str
+            Deequ maven package to use in Spark application. Defaults to "com.amazon.deequ:deequ:2.0.1-spark-3.2".
+
+        delta_maven_package: str
+            Delta maven package to use in Spark application. Defaults to "io.delta:delta-core_2.12:1.2.1"
         """
         return (
             SparkSession
             .builder
-            .config("spark.jars.packages", "com.amazon.deequ:deequ:2.0.0-spark-3.1,io.delta:delta-core_2.12:1.0.0")
+            .config("spark.jars.packages", f"{deequ_maven_package},{delta_maven_package}")
             .config("spark.jars.excludes", "net.sourceforge.f2j:arpack_combined_all")
             .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
             .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
@@ -112,7 +130,7 @@ class DataQuality(DQ):
 
 
     def write_output(self, df: DataFrame, path: str,
-                     mode: str = "overwrite", delta: bool = True) -> None:
+                     mode: str = "append", delta: bool = True) -> None:
         """
         Write output for DataQuality process.
 
@@ -125,7 +143,7 @@ class DataQuality(DQ):
             path
         mode: str
             Write mode for parquet or delta table. One of "overwrite",
-            "append", "error" or "ignore". Defaults to "overwrite".
+            "append", "error" or "ignore". Defaults to "append".
         delta: bool
             If True, write a delta table on specified path. If False, write a
             simple parquet file. Defaults to True.

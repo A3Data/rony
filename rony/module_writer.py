@@ -212,13 +212,18 @@ def create_module_from_diff(module_name):
     patch_file = f".rony_{module_name}.patch"
     module_path = os.path.join(os.path.expanduser("~"), "MyRonyModules", module_name)
 
-    p = subprocess.call(["git", "diff", "--no-prefix"], stdout=open(patch_file, "w"))
+    git_command = "git add -N -A; git diff --no-prefix"
+    ret = subprocess.run(
+        git_command,
+        capture_output=True,
+        shell=True,
+    )
 
-    patch_set = PatchSet.from_filename(patch_file)
+    patch_set = PatchSet(ret.stdout.decode())
 
     for patched_file in patch_set:
 
-        file_path = patched_file.path
+        file_path = patched_file.target_file
         added_lines = []
         for hunk in patched_file:
             for line in hunk:
@@ -233,8 +238,6 @@ def create_module_from_diff(module_name):
 
         with open(module_file_path, "w") as f:
             f.write("".join(added_lines))
-
-    os.remove(patch_file)
 
     info = click.prompt("Please your modules description", default="")
     inst = click.prompt(
@@ -252,6 +255,7 @@ def create_module_from_diff(module_name):
                     "developers": [developer],
                     "input_info": [],
                     "version": "0.0.0",
+                    "dependencies": [],
                 },
                 sort_keys=True,
                 indent=4,

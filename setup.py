@@ -7,6 +7,7 @@ exec(open('rony/_version.py').read())
 with open('README.md', encoding='utf-8') as f:
     long_description = f.read()
 
+
 setup(
     name='rony',
     version=__version__,
@@ -29,10 +30,10 @@ setup(
       keywords='data engineering mlops devops pipelines',
       license='Apache License 2.0',
     install_requires=[
-        'Click',
-        'Jinja2',
-        'packaging',
-        'unidiff',
+        'Click>=7.0.0,<8.0.0',
+        'Jinja2>=3.0.0,<=3.1.2',
+        'packaging>=21.0,<=21.3',
+        'unidiff>=0.7.0,<=0.7.4',
     ],
     entry_points='''
         [console_scripts]
